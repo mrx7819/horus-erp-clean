@@ -1,0 +1,78 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+{% block content %}
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Categorías</h1>
+        
+        <!-- Sección de búsqueda y agregar categoría -->
+        <div class="mb-3">
+            <div class="d-flex flex-column flex-md-row align-items-start justify-content-center">
+                <div class="input-group mb-2 mb-md-0" style="max-width: 300px; margin-right: 7px;">
+                    <input type="text" class="form-control" placeholder="Buscar categorías" aria-label="Buscar categoría">
+                </div>
+                <button class="btn btn-dark mb-2 mb-md-0 me-md-2" type="button" id="button-search">
+                    <i class="fa fa-search"></i>
+                </button>
+                <a href="{% url 'agregarCategoria' %}" class="btn btn-success">
+                    <i class="fa fa-user-plus"></i> Agregar Categoría
+                </a>
+            </div>
+        </div>
+
+        <!-- Tabla de categorías (para dispositivos de escritorio) -->
+        <div class="table-responsive d-none d-md-block">
+            <table class="table table-striped table-bordered table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Fecha de Creación</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in categorias %}
+                    <tr>
+                        <td>{{ c.id }}</td>
+                        <td>{{ c.nombre }}</td>
+                        <td>{{ c.descripcion }}</td>
+                        <td>{{ c.fecha_creacion|date:"d/m/Y" }}</td>    
+                        <td>
+                            <button class="btn btn-warning" onclick="window.location.href='/modificarCategoria/{{ c.id }}'">
+                                <i class="fa fa-refresh"></i>
+                            </button>
+                            <button class="btn btn-danger" onclick="window.location.href='/eliminarCategoria/{{ c.id }}'">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>                                  
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">No hay Categorías disponibles.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Vista de tarjetas para dispositivos móviles -->
+        <div class="d-md-none">
+            {% for c in categorias %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Categoría ID: {{ c.id }}</h5>
+                    <p><strong>Nombre:</strong> {{ c.nombre }}</p>
+                    <p><strong>Descripción:</strong> {{ c.descripcion }}</p>
+                    <p><strong>Fecha de Creación:</strong> {{ c.fecha_creacion|date:"d/m/Y" }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="alert alert-warning" role="alert">No hay categorías disponibles.</div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

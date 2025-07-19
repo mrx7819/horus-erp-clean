@@ -1,0 +1,187 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <div class="alert  text-center">
+            <h3><strong>¡Agrega una Nueva Bodega!</strong></h3>
+            <p>Completa los campos necesarios para registrar una nueva bodega.</p>
+        </div>
+
+        <!-- Formulario estilizado dentro de una tarjeta -->
+        <div class="card shadow p-4 rounded" style="max-width: 700px; margin: auto; background-color: #ffffff;">
+            <div class="card-body">
+                <form id="add-bodega-form" class="agregarBodega-form" action="{% url 'agregarBodega' %}" method="post">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <!-- Nombre Field -->
+                        <div class="form-group col-md-6">
+                            <label for="nombre"><strong>Nombre</strong></label>
+                            <input 
+                                type="text" 
+                                class="form-control rounded-pill" 
+                                id="nombre" 
+                                name="nombre" 
+                                value="{{ form.nombre.value|default:'' }}" 
+                                placeholder="Ingrese el nombre de la bodega" 
+                                required>
+                            {% if form.nombre.errors %}
+                                <small class="text-danger">{{ form.nombre.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+
+                        <!-- Capacidad Field -->
+                        <div class="form-group col-md-6">
+                            <label for="capacidad"><strong>Capacidad</strong></label>
+                            <input 
+                                type="number" 
+                                class="form-control rounded-pill" 
+                                id="capacidad" 
+                                name="capacidad" 
+                                value="{{ form.capacidad.value|default:'' }}" 
+                                placeholder="Ingrese la capacidad" 
+                                min="0" 
+                                required>
+                            {% if form.capacidad.errors %}
+                                <small class="text-danger">{{ form.capacidad.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Dirección Field -->
+                        <div class="form-group col-md-12">
+                            <label for="direccion"><strong>Dirección</strong></label>
+                            <textarea 
+                                class="form-control rounded" 
+                                id="direccion" 
+                                name="direccion" 
+                                placeholder="Ingrese la dirección" 
+                                rows="2" 
+                                style="resize: none;" 
+                                required>{{ form.direccion.value|default:'' }}</textarea>
+                            {% if form.direccion.errors %}
+                                <small class="text-danger">{{ form.direccion.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Región Field -->
+                        <div class="form-group col-md-4">
+                            <label for="region"><strong>Región</strong></label>
+                            <select class="form-control rounded-pill" id="id_region" name="region" required>
+                                <option value="">Selecciona una región</option>
+                            </select>
+                        </div>
+
+                        <!-- Provincia Field -->
+                        <div class="form-group col-md-4">
+                            <label for="provincia"><strong>Provincia</strong></label>
+                            <select class="form-control rounded-pill" id="id_provincia" name="provincia" required>
+                                <option value="">Selecciona una provincia</option>
+                            </select>
+                        </div>
+
+                        <!-- Comuna Field -->
+                        <div class="form-group col-md-4">
+                            <label for="comuna"><strong>Comuna</strong></label>
+                            <select class="form-control rounded-pill" id="id_comuna" name="comuna" required>
+                                <option value="">Selecciona una comuna</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="text-center mt-4">
+                        <a href="{% url 'listarBodega' %}" class="btn btn-secondary btn-sm rounded-pill">
+                            <i class="fa fa-arrow-left"></i> Volver
+                        </a>
+                        <button type="button" id="add-button" class="btn btn-success btn-sm rounded-pill">
+                            <i class="fa fa-plus"></i> Agregar Bodega
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para SweetAlert2 -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addButton = document.getElementById('add-button');
+        const addBodegaForm = document.getElementById('add-bodega-form');
+
+        addButton.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Se agregará la nueva bodega con los datos ingresados.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, agregar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    addBodegaForm.submit(); // Enviar el formulario si el usuario confirma
+                }
+            });
+        });
+
+        // Cargar las regiones, provincias y comunas dinámicamente
+        const regionSelect = document.getElementById('id_region');
+        const provinciaSelect = document.getElementById('id_provincia');
+        const comunaSelect = document.getElementById('id_comuna');
+
+        fetch('{% url "get_regiones" %}')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(region => {
+                    const option = document.createElement('option');
+                    option.value = region.id;
+                    option.textContent = region.nombre;
+                    regionSelect.add(option);
+                });
+            });
+
+        regionSelect.addEventListener('change', () => {
+            const regionId = regionSelect.value;
+            fetch(`{% url "get_provincias_por_region" region_id=":region_id" %}`.replace(':region_id', regionId))
+                .then(response => response.json())
+                .then(data => {
+                    provinciaSelect.innerHTML = '<option value="">Selecciona una provincia</option>';
+                    comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
+                    data.forEach(provincia => {
+                        const option = document.createElement('option');
+                        option.value = provincia.id;
+                        option.textContent = provincia.nombre;
+                        provinciaSelect.add(option);
+                    });
+                });
+        });
+
+        provinciaSelect.addEventListener('change', () => {
+            const provinciaId = provinciaSelect.value;
+            fetch(`{% url "get_comunas_por_provincia" provincia_id=":provincia_id" %}`.replace(':provincia_id', provinciaId))
+                .then(response => response.json())
+                .then(data => {
+                    comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
+                    data.forEach(comuna => {
+                        const option = document.createElement('option');
+                        option.value = comuna.id;
+                        option.textContent = comuna.nombre;
+                        comunaSelect.add(option);
+                    });
+                });
+        });
+    });
+</script>
+{% endblock %}

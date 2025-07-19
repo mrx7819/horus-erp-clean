@@ -1,0 +1,67 @@
+[
+    
+    {
+        "codigo_region": 1,
+        "nombre": "Tarapacá"
+    },
+    {
+        "codigo_region": 2,
+        "nombre": "Antofagasta"
+    },
+    {
+        "codigo_region": 3,
+        "nombre": "Atacama"
+    },
+    {
+        "codigo_region": 4,
+        "nombre": "Coquimbo"
+    },
+    {
+        "codigo_region": 5,
+        "nombre": "Valparaíso"
+    },
+    {
+        "codigo_region": 6,
+        "nombre": "Libertador B. O'Higgins"
+    },
+    {
+        "codigo_region": 7,
+        "nombre": "Maule"
+    },
+    {
+        "codigo_region": 8,
+        "nombre": "Bíobío"
+    },
+    {
+        "codigo_region": 16,
+        "nombre": "Ñuble"
+    },
+    {
+        "codigo_region": 9,
+        "nombre": "Araucanía"
+    },
+    {
+        "codigo_region": 14,
+        "nombre": "Los Ríos"
+    },
+    {
+        "codigo_region": 10,
+        "nombre": "Los Lagos"
+    },
+    {
+        "codigo_region": 11,
+        "nombre": "Aisén del Gral. C. Ibáñez del Campo"
+    },
+    {
+        "codigo_region": 12,
+        "nombre": "Magallanes y de La Antártica Chilena"
+    },
+    {
+        "codigo_region": 13,
+        "nombre": "Metropolitana de Santiago"
+    },
+    {
+        "codigo_region": 15,
+        "nombre": "Arica y Parinacota"
+    }
+]

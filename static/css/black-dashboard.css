@@ -1,0 +1,268 @@
+/* Estilos para el contenedor de las tarjetas principales */
+.row-principal {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las tarjetas se distribuyan en varias filas */
+  gap: 15px; /* Espaciado uniforme entre tarjetas */
+  justify-content: space-between; /* Espaciado proporcional */
+  margin-bottom: 30px;
+}
+
+/* Estilos generales para las tarjetas */
+.card-wrapper {
+  flex: 0 1 calc(25% - 15px); /* 4 tarjetas por fila en pantallas grandes */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Asegura el contenido distribuido verticalmente */
+  min-height: 250px; /* Altura mínima */
+  box-sizing: border-box; /* Incluir bordes en el tamaño */
+}
+
+@media (max-width: 992px) {
+  .card-wrapper {
+      flex: 0 1 calc(50% - 15px); /* 2 tarjetas por fila en pantallas medianas */
+  }
+}
+
+@media (max-width: 768px) {
+  .card-wrapper {
+      flex: 0 1 100%; /* 1 tarjeta por fila en pantallas pequeñas */
+  }
+}
+
+/* Tarjetas generales */
+.custom-card {
+  background-color: #ffffff; /* Fondo blanco */
+  border: 1px solid #e5e5e5; /* Borde sutil */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  padding: 15px; /* Espaciado interno */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Ocupar toda la altura del contenedor */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-card:hover {
+  transform: translateY(-5px); /* Eleva la tarjeta ligeramente */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+}
+
+/* Encabezado de las tarjetas */
+.custom-card-header {
+  background-color: #f9f9f9; /* Fondo gris claro */
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5; /* Línea divisoria */
+  border-radius: 10px 10px 0 0; /* Bordes superiores redondeados */
+  font-weight: bold;
+  text-align: center; /* Centrar el texto */
+}
+
+.custom-card-header h5 {
+  color: #777; /* Texto gris */
+  font-size: 1rem;
+  margin: 0;
+}
+
+.custom-card-header h2 {
+  color: #333; /* Texto oscuro */
+  font-size: 1.4rem;
+  margin: 10px 0 0; /* Espaciado superior */
+}
+
+/* Estilo del dropdown con colores personalizados */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  background-color: #353535; /* Fondo gris oscuro */
+  padding: 10px;
+  border-radius: 8px; /* Bordes redondeados */
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: white; /* Texto blanco */
+}
+
+.dropdown-selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-selected img {
+  margin-right: 8px;
+}
+
+.dropdown-options {
+  position: absolute;
+  background-color: #353535; /* Fondo gris oscuro */
+  border-radius: 8px;
+  list-style: none;
+  margin: 5px 0 0;
+  padding: 0;
+  z-index: 1000;
+  width: 100%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  display: none; /* Ocultar por defecto */
+}
+
+.dropdown-options li {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  color: white;
+  border-bottom: 1px solid #444; /* Línea divisoria */
+  cursor: pointer;
+}
+
+.dropdown-options li:hover {
+  background-color: #444444; /* Fondo más claro al pasar el cursor */
+  color: #ffffff;
+}
+
+.custom-dropdown.active .dropdown-options {
+  display: block; /* Mostrar opciones al hacer clic */
+}
+/* Cuerpo de las tarjetas */
+.custom-card-body {
+  flex-grow: 1; /* Ocupa el espacio restante */
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 0 0 10px 10px; /* Bordes inferiores redondeados */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Centrar el contenido */
+  text-align: center; /* Centrar texto */
+}
+
+/* Gráfico ocupa todo el espacio en la tarjeta larga */
+.large-card .chart-wrapper {
+  position: relative;
+  width: 100%; /* Ocupar todo el ancho */
+  height: 100%; /* Ocupar todo el alto */
+}
+
+/* Estilo para la fila grande (gráfico) */
+.row-large {
+  margin-bottom: 30px;
+}
+
+.large-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 400px; /* Altura mínima */
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .large-card {
+      min-height: 300px; /* Ajustar altura para pantallas pequeñas */
+  }
+}
+
+/* Tabla unificada */
+.card-chart .mini-table {
+  width: 100%; /* Ocupa todo el ancho */
+  border-collapse: collapse; /* Unifica los bordes */
+  margin-top: 15px; /* Separación con el encabezado */
+  font-size: 0.9rem; /* Tamaño del texto */
+  color: #e0e0e0; /* Texto claro */
+}
+
+.card-chart .mini-table thead {
+  background-color: #353535; /* Fondo gris oscuro */
+  color: #ffffff; /* Texto blanco */
+  font-weight: bold;
+}
+
+.card-chart .mini-table thead th {
+  padding: 10px;
+  text-align: left; /* Alinear texto a la izquierda */
+  border-bottom: 2px solid #444444; /* Línea divisoria */
+}
+
+.card-chart .mini-table tbody tr {
+  border-bottom: 1px solid #444444; /* Líneas divisorias entre filas */
+}
+
+.card-chart .mini-table tbody tr:last-child {
+  border-bottom: none; /* Eliminar línea inferior para la última fila */
+}
+
+.card-chart .mini-table td {
+  padding: 10px;
+  text-align: left; /* Alinear texto a la izquierda */
+  background-color: #3b3b3b; /* Fondo gris oscuro */
+}
+
+/* Hover para filas */
+.card-chart .mini-table tbody tr:hover {
+  background-color: #5c5c5c; /* Fondo más claro al pasar el cursor */
+}
+
+
+/* Responsividad para pantallas medianas */
+@media (max-width: 768px) {
+  .card-chart .mini-table tr {
+      flex: 0 1 calc(50% - 10px); /* 2 elementos por fila */
+  }
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 480px) {
+  .card-chart .mini-table tr {
+      flex: 0 1 100%; /* 1 elemento por fila */
+  }
+}
+
+/* Estilo para la imagen del producto estrella */
+.producto-estrella-img {
+  width: 100%; /* Ajustar al ancho disponible */
+  height: 90px; /* Altura fija */
+  object-fit: contain; /* Mantener proporciones */
+  display: block;
+}
+
+/* Porcentajes (sin cambios) */
+.percentage-badge {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 50px;
+  display: inline-block;
+  color: #ffffff;
+  text-align: center;
+}
+
+.percentage-badge.positive {
+  color: #41ffa0;
+}
+
+.percentage-badge.negative {
+  background-color: #f44336;
+}
+
+.row-secundarias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Espaciado entre tarjetas */
+  justify-content: space-between; /* Distribuir uniformemente */
+}
+
+.row-secundarias .card-wrapper {
+  flex: 1 1 calc(33.333% - 15px); /* Tres tarjetas iguales */
+}
+
+@media (max-width: 992px) {
+  .row-secundarias .card-wrapper {
+      flex: 0 1 calc(50% - 15px); /* 2 tarjetas por fila en pantallas medianas */
+  }
+}
+
+@media (max-width: 768px) {
+  .row-secundarias .card-wrapper {
+      flex: 0 1 100%; /* 1 tarjeta por fila en pantallas pequeñas */
+  }
+}
+

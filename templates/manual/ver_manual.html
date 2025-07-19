@@ -1,0 +1,98 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% block content %}
+<div class="right_col" role="main">
+    <!-- Sección de Introducción -->
+    <div class="manual-intro mb-5 p-4" style="background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <h1 style="font-size: 28px; color: #353535;">Manual de Uso del ERP</h1>
+        <p style="font-size: 16px; color: #555; margin-top: 10px;">
+            Este manual te guiará paso a paso para utilizar las funcionalidades principales del ERP. 
+            Sigue el orden recomendado para asegurar que tu sistema esté configurado correctamente y operando sin problemas.
+        </p>
+    </div>
+
+    <!-- Sección de Pasos -->
+    <div class="manual-steps">
+        <!-- Paso 1: Añadir Cliente -->
+        <div class="step-card mb-4 p-3" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="color: #353535;">Paso 1: Añadir un Cliente</h3>
+            <p style="color: #555;">
+                Antes de realizar ventas, asegúrate de registrar a tus clientes. Para ventas presenciales con clientes rotativos, 
+                puedes crear un cliente genérico llamado "Cliente Genérico".
+            </p>
+            <a href="{% url 'agregarCliente' %}" class="btn btn-primary btn-sm mt-3">
+                <i class="fa fa-user-plus"></i> Añadir Cliente
+            </a>
+        </div>
+
+        <!-- Paso 2: Añadir Proveedor -->
+        <div class="step-card mb-4 p-3" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="color: #353535;">Paso 2: Añadir un Proveedor</h3>
+            <p style="color: #555;">
+                Registra a tus proveedores para gestionar tus pedidos y mantener el control sobre los productos que ingresan a tu inventario.
+            </p>
+            <a href="{% url 'agregarProveedor' %}" class="btn btn-info btn-sm mt-3">
+                <i class="fa fa-truck"></i> Añadir Proveedor
+            </a>
+        </div>
+
+        <!-- Paso 3: Añadir Categoría -->
+        <div class="step-card mb-4 p-3" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="color: #353535;">Paso 3: Añadir una Categoría</h3>
+            <p style="color: #555;">
+                Crea categorías para organizar los productos en tu inventario de manera eficiente y mejorar la gestión de tus datos.
+            </p>
+            <a href="{% url 'agregarCategoria' %}" class="btn btn-success btn-sm mt-3">
+                <i class="fa fa-tags"></i> Añadir Categoría
+            </a>
+        </div>
+
+        <!-- Paso 4: Añadir Bodega -->
+        <div class="step-card mb-4 p-3" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="color: #353535;">Paso 4: Añadir una Bodega</h3>
+            <p style="color: #555;">
+                Registra las bodegas donde almacenarás tus productos. Esto permitirá controlar la ubicación y el stock disponible.
+            </p>
+            <a href="{% url 'agregarBodega' %}" class="btn btn-warning btn-sm mt-3">
+                <i class="fa fa-warehouse"></i> Añadir Bodega
+            </a>
+        </div>
+
+        <!-- Paso 5: Añadir Producto -->
+        <div class="step-card mb-4 p-3" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="color: #353535;">Paso 5: Añadir un Producto</h3>
+            <p style="color: #555;">
+                Registra los productos que venderás. Asegúrate de asignarles una categoría, proveedor y ubicación en bodega.
+            </p>
+            <a href="{% url 'agregarProducto' %}" class="btn btn-danger btn-sm mt-3">
+                <i class="fa fa-box"></i> Añadir Producto
+            </a>
+        </div>
+
+        <!-- Paso 6: Realizar un Pedido -->
+        <div class="step-card mb-4 p-3" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="color: #353535;">Paso 6: Realizar un Pedido</h3>
+            <p style="color: #555;">
+                En caso de necesitar reabastecimiento, crea un pedido para registrar compras a tus proveedores.
+            </p>
+            <a href="#" class="btn btn-secondary btn-sm mt-3">
+                <i class="fa fa-shopping-cart"></i> Realizar Pedido
+            </a>
+        </div>
+
+        <!-- Paso 7: Registrar una Venta -->
+        <div class="step-card mb-4 p-3" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h3 style="color: #353535;">Paso 7: Registrar una Venta</h3>
+            <p style="color: #555;">
+                Una vez configurado todo, comienza a registrar tus ventas. Asegúrate de seleccionar al cliente y los productos correspondientes.
+            </p>
+            <a href="{% url 'agregarVenta' %}" class="btn btn-primary btn-sm mt-3">
+                <i class="fa fa-cash-register"></i> Registrar Venta
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

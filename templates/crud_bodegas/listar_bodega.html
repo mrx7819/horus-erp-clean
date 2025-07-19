@@ -1,0 +1,147 @@
+{% extends '../index_master.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Bodegas</h1>
+        <a href="{% url 'agregarBodega' %}" class="btn btn-success mb-3">
+            <i class="fa fa-warehouse"></i> Agregar Bodega
+        </a>
+        
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-sm small-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Cantidad de Artículos</th>
+                        <th scope="col">Capacidad</th>
+                        <th scope="col">Comuna</th>
+                        <th scope="col">Región</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for b in bodegas %}
+                    <tr onclick="toggleText(this)">
+                        <td>{{ b.id }}</td>
+                        <td class="text-truncate" title="{{ b.nombre }}">{{ b.nombre }}</td>
+                        <td class="text-truncate" title="{{ b.direccion }}">{{ b.direccion }}</td>
+                        <td>{{ b.cantidad_art|default:0 }}</td>
+                        <td>{{ b.capacidad|default:0 }}</td>
+                        <td>{{ b.comuna.nombre }}</td>
+                        <td>{{ b.region.nombre }}</td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-around">
+                                <button class="btn btn-info btn-sm" title="Ver detalle de la bodega" onclick="window.location.href='/bodega/{{ b.id }}/productos/'">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                                <button class="btn btn-warning btn-sm" title="Modificar la bodega" onclick="window.location.href='/modificarBodega/{{ b.id }}'">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" title="Eliminar la bodega" onclick="window.location.href='/eliminarBodega/{{ b.id }}'">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="full-text" style="display: none;">
+                        <td colspan="7">
+                            <strong>ID:</strong> {{ b.id }}<br>
+                            <strong>Nombre completo:</strong> {{ b.nombre }}<br>
+                            <strong>Dirección completa:</strong> {{ b.direccion }}<br>
+                            <strong>Cantidad de Artículos:</strong> {{ b.cantidad_art|default:0 }}<br>
+                            <strong>Capacidad:</strong> {{ b.capacidad|default:0 }}<br>
+                            <strong>Comuna:</strong> {{ b.comuna.nombre }}<br>
+                            <strong>Región:</strong> {{ b.region.nombre }}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center">No hay bodegas disponibles.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Vista de tarjetas para dispositivos móviles -->
+        <div class="d-md-none">
+            {% for b in bodegas %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Bodega #{{ b.id }}</h5>
+                    <p><strong>Nombre:</strong> {{ b.nombre }}</p>
+                    <p><strong>Dirección:</strong> {{ b.direccion }}</p>
+                    <p><strong>Cantidad de Artículos:</strong> {{ b.cantidad_art|default:0 }}</p>
+                    <p><strong>Capacidad:</strong> {{ b.capacidad|default:0 }}</p>
+                    <p><strong>Comuna:</strong> {{ b.comuna.nombre }}</p>
+                    <p><strong>Región:</strong> {{ b.region.nombre }}</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button class="btn btn-info btn-sm" title="Ver detalle de la bodega" onclick="window.location.href='/detalle_bodega/{{ b.id }}'">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button class="btn btn-warning btn-sm" title="Modificar la bodega" onclick="window.location.href='/modificarBodega/{{ b.id }}'">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm" title="Eliminar la bodega" onclick="window.location.href='/eliminarBodega/{{ b.id }}'">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="alert alert-warning" role="alert">No hay bodegas disponibles.</div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleText(row) {
+        const nextRow = row.nextElementSibling;
+        if (nextRow && nextRow.classList.contains('full-text')) {
+            nextRow.style.display = nextRow.style.display === 'none' ? 'table-row' : 'none';
+        }
+    }
+</script>
+
+<script>
+    form.addEventListener('submit', function (e) {
+    const bodegaId = bodegaSelect.value;
+    const cantidad = parseInt(cantidadInput.value);
+
+    if (bodegaId && cantidad) {
+        const capacidadDisponible = bodegaCapacidades[bodegaId];
+
+        if (cantidad > capacidadDisponible) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Capacidad Excedida',
+                text: `No puedes agregar más de ${capacidadDisponible} productos. Corrige la cantidad.`,
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                cantidadInput.focus();
+            });
+        }
+    }
+});
+
+</script>
+
+<style>
+    .small-table {
+        font-size: 0.8rem;
+    }
+    .text-truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+
+{% endblock %}

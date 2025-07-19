@@ -1,0 +1,73 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% block content %}
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <div class="alert text-center">
+            <h3><strong>¡Atención!</strong> Estás a punto de eliminar una categoría</h3>
+            <p>Esta acción no se puede deshacer. Por favor, asegúrate de que deseas continuar.</p>
+        </div>
+
+        <!-- Formulario estilizado dentro de una tarjeta -->
+        <div class="card shadow p-4 rounded" style="max-width: 600px; margin: auto; background-color: #ffffff;">
+            <div class="card-header text-center text-danger">
+                <h4>Eliminar Categoría</h4>
+            </div>
+            <div class="card-body">
+                <form id="delete-form" action="{% if categoria.id %}{% url 'eliminarCategoria' categoria.id %}{% endif %}" method="POST">
+                    {% csrf_token %}
+
+                    <!-- Selección de Categoría -->
+                    <div class="form-group">
+                        <label for="id"><strong>ID Categoría</strong></label>
+                        <select id="id" name="id" class="form-control rounded-pill">
+                            {% for c in categorias %}
+                                <option value="{{ c.id }}" {% if c.id == categoria.id %} selected {% endif %}>{{ c.id }} - {{ c.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="text-center mt-4">
+                        <a href="{% url 'listarCategoria' %}" class="btn btn-secondary btn-sm rounded-pill">
+                            <i class="fa fa-arrow-left"></i> Cancelar
+                        </a>
+                        <button type="button" id="delete-button" class="btn btn-danger btn-sm rounded-pill">
+                            <i class="fa fa-trash"></i> Eliminar Categoría
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para SweetAlert2 -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButton = document.getElementById('delete-button');
+        const deleteForm = document.getElementById('delete-form');
+
+        deleteButton.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción eliminará la categoría seleccionada de forma permanente.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteForm.submit(); // Enviar el formulario si el usuario confirma
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

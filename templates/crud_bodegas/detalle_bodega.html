@@ -1,0 +1,111 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <div class="text-center mb-4">
+            <h3 class="display-5 text-primary">Productos en la Bodega</h3>
+            <p class="lead">
+                <strong>{{ bodega.nombre }}</strong>
+                <br>
+                <span class="text-muted">{{ bodega.direccion }}</span>
+            </p>
+            <div class="d-flex justify-content-center gap-4">
+                <p class="badge badge-light border shadow-sm p-2">Capacidad: {{ bodega.capacidad }} unidades</p>
+                <p class="badge badge-light border shadow-sm p-2">Artículos Actuales: {{ bodega.calcular_cantidad_articulos }}</p>
+            </div>
+        </div>
+
+        {% if productos %}
+        <div class="row mt-4">
+            {% for producto in productos %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3 d-flex align-items-stretch">
+                <div class="card border-0 shadow-sm" style="border-radius: 10px; width: 95%; overflow: hidden; background-color: #f9f9f9;">
+                    <div class="card-img-top bg-light" style="height: 200px;">
+                        {% if producto.img %}
+                        <img src="{{ producto.img.url }}" alt="{{ producto.nombre }}" style="height: 100%; object-fit: cover; width: 100%; border-radius: 10px 10px 0 0;">
+                        {% else %}
+                        <img src="{% static 'images/default-product.png' %}" alt="Sin Imagen" style="height: 100%; object-fit: cover; width: 100%; border-radius: 10px 10px 0 0;">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title text-center text-dark mb-2">{{ producto.nombre }}</h6>
+                        <p class="text-muted small"><strong>SKU:</strong> {{ producto.sku }}</p>
+                        <p class="text-muted small"><strong>Precio Compra:</strong> ${{ producto.precio_compra }}</p>
+                        <p class="text-muted small"><strong>Precio Venta:</strong> ${{ producto.precio_venta }}</p>
+                        <p class="text-muted small"><strong>Cantidad:</strong> {{ producto.cantidad }}</p>
+                        <p class="text-muted small"><strong>Categoría:</strong> {{ producto.categoria.nombre }}</p>
+                        <p class="text-muted small">
+                            <strong>Proveedor:</strong> 
+                            {% if producto.proveedor %}
+                                {{ producto.proveedor.nombre }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </p>
+                        <button class="btn btn-outline-primary btn-sm btn-block view-details mt-2" 
+                                data-name="{{ producto.nombre }}" 
+                                data-sku="{{ producto.sku }}" 
+                                data-precio-compra="{{ producto.precio_compra }}" 
+                                data-precio-venta="{{ producto.precio_venta }}" 
+                                data-cantidad="{{ producto.cantidad }}" 
+                                data-categoria="{{ producto.categoria.nombre }}"
+                                {% if producto.proveedor %}
+                                data-proveedor="{{ producto.proveedor.nombre }}"
+                                {% else %}
+                                data-proveedor="N/A"
+                                {% endif %}>
+                            Ver Detalles
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Bodega sin productos',
+                    text: 'Esta bodega no tiene productos registrados.',
+                    confirmButtonText: 'Volver al listado',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "{% url 'listarBodega' %}";
+                    }
+                });
+            });
+        </script>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const detailButtons = document.querySelectorAll('.view-details');
+
+        detailButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                Swal.fire({
+                    title: 'Detalles del Producto',
+                    html: `
+                        <p><strong>Nombre:</strong> ${this.dataset.name}</p>
+                        <p><strong>SKU:</strong> ${this.dataset.sku}</p>
+                        <p><strong>Precio de Compra:</strong> $${this.dataset.precioCompra}</p>
+                        <p><strong>Precio de Venta:</strong> $${this.dataset.precioVenta}</p>
+                        <p><strong>Cantidad:</strong> ${this.dataset.cantidad}</p>
+                        <p><strong>Categoría:</strong> ${this.dataset.categoria}</p>
+                        <p><strong>Proveedor:</strong> ${this.dataset.proveedor}</p>
+                    `,
+                    icon: 'info',
+                    confirmButtonText: 'Cerrar',
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

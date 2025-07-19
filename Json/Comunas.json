@@ -1,0 +1,1727 @@
+[
+    {
+        "codigo_comuna": 15101,
+        "nombre": "Arica",
+        "provincia": 151
+    },
+    {
+        "codigo_comuna": 15102,
+        "nombre": "Camarones",
+        "provincia": 151
+    },
+    {
+        "codigo_comuna": 15201,
+        "nombre": "Putre",
+        "provincia": 152
+    },
+    {
+        "codigo_comuna": 15202,
+        "nombre": "General Lagos",
+        "provincia": 152
+    },
+    {
+        "codigo_comuna": 1101,
+        "nombre": "Iquique",
+        "provincia": 11
+    },
+    {
+        "codigo_comuna": 1402,
+        "nombre": "Camiña",
+        "provincia": 14
+    },
+    {
+        "codigo_comuna": 1403,
+        "nombre": "Colchane",
+        "provincia": 14
+    },
+    {
+        "codigo_comuna": 1404,
+        "nombre": "Huara",
+        "provincia": 14
+    },
+    {
+        "codigo_comuna": 1405,
+        "nombre": "Pica",
+        "provincia": 14
+    },
+    {
+        "codigo_comuna": 1401,
+        "nombre": "Pozo Almonte",
+        "provincia": 14
+    },
+    {
+        "codigo_comuna": 1107,
+        "nombre": "Alto Hospicio",
+        "provincia": 11
+    },
+    {
+        "codigo_comuna": 2101,
+        "nombre": "Antofagasta",
+        "provincia": 21
+    },
+    {
+        "codigo_comuna": 2102,
+        "nombre": "Mejillones",
+        "provincia": 21
+    },
+    {
+        "codigo_comuna": 2103,
+        "nombre": "Sierra Gorda",
+        "provincia": 21
+    },
+    {
+        "codigo_comuna": 2104,
+        "nombre": "Taltal",
+        "provincia": 21
+    },
+    {
+        "codigo_comuna": 2201,
+        "nombre": "Calama",
+        "provincia": 22
+    },
+    {
+        "codigo_comuna": 2202,
+        "nombre": "Ollagüe",
+        "provincia": 22
+    },
+    {
+        "codigo_comuna": 2203,
+        "nombre": "San Pedro de Atacama",
+        "provincia": 22
+    },
+    {
+        "codigo_comuna": 2301,
+        "nombre": "Tocopilla",
+        "provincia": 23
+    },
+    {
+        "codigo_comuna": 2302,
+        "nombre": "María Elena",
+        "provincia": 23
+    },
+    {
+        "codigo_comuna": 3101,
+        "nombre": "Copiapó",
+        "provincia": 31
+    },
+    {
+        "codigo_comuna": 3102,
+        "nombre": "Caldera",
+        "provincia": 31
+    },
+    {
+        "codigo_comuna": 3103,
+        "nombre": "Tierra Amarilla",
+        "provincia": 31
+    },
+    {
+        "codigo_comuna": 3201,
+        "nombre": "Chañaral",
+        "provincia": 32
+    },
+    {
+        "codigo_comuna": 3202,
+        "nombre": "Diego de Almagro",
+        "provincia": 32
+    },
+    {
+        "codigo_comuna": 3301,
+        "nombre": "Vallenar",
+        "provincia": 33
+    },
+    {
+        "codigo_comuna": 3302,
+        "nombre": "Alto del Carmen",
+        "provincia": 33
+    },
+    {
+        "codigo_comuna": 3303,
+        "nombre": "Freirina",
+        "provincia": 33
+    },
+    {
+        "codigo_comuna": 3304,
+        "nombre": "Huasco",
+        "provincia": 33
+    },
+    {
+        "codigo_comuna": 4101,
+        "nombre": "La Serena",
+        "provincia": 41
+    },
+    {
+        "codigo_comuna": 4102,
+        "nombre": "Coquimbo",
+        "provincia": 41
+    },
+    {
+        "codigo_comuna": 4103,
+        "nombre": "Andacollo",
+        "provincia": 41
+    },
+    {
+        "codigo_comuna": 4104,
+        "nombre": "La Higuera",
+        "provincia": 41
+    },
+    {
+        "codigo_comuna": 4105,
+        "nombre": "Paiguano",
+        "provincia": 41
+    },
+    {
+        "codigo_comuna": 4106,
+        "nombre": "Vicuña",
+        "provincia": 41
+    },
+    {
+        "codigo_comuna": 4201,
+        "nombre": "Illapel",
+        "provincia": 42
+    },
+    {
+        "codigo_comuna": 4202,
+        "nombre": "Canela",
+        "provincia": 42
+    },
+    {
+        "codigo_comuna": 4203,
+        "nombre": "Los Vilos",
+        "provincia": 42
+    },
+    {
+        "codigo_comuna": 4204,
+        "nombre": "Salamanca",
+        "provincia": 42
+    },
+    {
+        "codigo_comuna": 4301,
+        "nombre": "Ovalle",
+        "provincia": 43
+    },
+    {
+        "codigo_comuna": 4302,
+        "nombre": "Combarbalá",
+        "provincia": 43
+    },
+    {
+        "codigo_comuna": 4303,
+        "nombre": "Monte Patria",
+        "provincia": 43
+    },
+    {
+        "codigo_comuna": 4304,
+        "nombre": "Punitaqui",
+        "provincia": 43
+    },
+    {
+        "codigo_comuna": 4305,
+        "nombre": "Río Hurtado",
+        "provincia": 43
+    },
+    {
+        "codigo_comuna": 5101,
+        "nombre": "Valparaíso",
+        "provincia": 51
+    },
+    {
+        "codigo_comuna": 5102,
+        "nombre": "Casablanca",
+        "provincia": 51
+    },
+    {
+        "codigo_comuna": 5103,
+        "nombre": "Concón",
+        "provincia": 51
+    },
+    {
+        "codigo_comuna": 5104,
+        "nombre": "Juan Fernández",
+        "provincia": 51
+    },
+    {
+        "codigo_comuna": 5105,
+        "nombre": "Puchuncaví",
+        "provincia": 51
+    },
+    {
+        "codigo_comuna": 5107,
+        "nombre": "Quintero",
+        "provincia": 51
+    },
+    {
+        "codigo_comuna": 5109,
+        "nombre": "Viña del Mar",
+        "provincia": 51
+    },
+    {
+        "codigo_comuna": 5201,
+        "nombre": "Isla de Pascua",
+        "provincia": 52
+    },
+    {
+        "codigo_comuna": 5301,
+        "nombre": "Los Andes",
+        "provincia": 53
+    },
+    {
+        "codigo_comuna": 5302,
+        "nombre": "Calle Larga",
+        "provincia": 53
+    },
+    {
+        "codigo_comuna": 5303,
+        "nombre": "Rinconada",
+        "provincia": 53
+    },
+    {
+        "codigo_comuna": 5304,
+        "nombre": "San Esteban",
+        "provincia": 53
+    },
+    {
+        "codigo_comuna": 5401,
+        "nombre": "La Ligua",
+        "provincia": 54
+    },
+    {
+        "codigo_comuna": 5402,
+        "nombre": "Cabildo",
+        "provincia": 54
+    },
+    {
+        "codigo_comuna": 5403,
+        "nombre": "Papudo",
+        "provincia": 54
+    },
+    {
+        "codigo_comuna": 5404,
+        "nombre": "Petorca",
+        "provincia": 54
+    },
+    {
+        "codigo_comuna": 5405,
+        "nombre": "Zapallar",
+        "provincia": 54
+    },
+    {
+        "codigo_comuna": 5501,
+        "nombre": "Quillota",
+        "provincia": 55
+    },
+    {
+        "codigo_comuna": 5502,
+        "nombre": "Calera",
+        "provincia": 55
+    },
+    {
+        "codigo_comuna": 5503,
+        "nombre": "Hijuelas",
+        "provincia": 55
+    },
+    {
+        "codigo_comuna": 5504,
+        "nombre": "La Cruz",
+        "provincia": 55
+    },
+    {
+        "codigo_comuna": 5506,
+        "nombre": "Nogales",
+        "provincia": 55
+    },
+    {
+        "codigo_comuna": 5601,
+        "nombre": "San Antonio",
+        "provincia": 56
+    },
+    {
+        "codigo_comuna": 5602,
+        "nombre": "Algarrobo",
+        "provincia": 56
+    },
+    {
+        "codigo_comuna": 5603,
+        "nombre": "Cartagena",
+        "provincia": 56
+    },
+    {
+        "codigo_comuna": 5604,
+        "nombre": "El Quisco",
+        "provincia": 56
+    },
+    {
+        "codigo_comuna": 5605,
+        "nombre": "El Tabo",
+        "provincia": 56
+    },
+    {
+        "codigo_comuna": 5606,
+        "nombre": "Santo Domingo",
+        "provincia": 56
+    },
+    {
+        "codigo_comuna": 5701,
+        "nombre": "San Felipe",
+        "provincia": 57
+    },
+    {
+        "codigo_comuna": 5702,
+        "nombre": "Catemu",
+        "provincia": 57
+    },
+    {
+        "codigo_comuna": 5703,
+        "nombre": "Llaillay",
+        "provincia": 57
+    },
+    {
+        "codigo_comuna": 5704,
+        "nombre": "Panquehue",
+        "provincia": 57
+    },
+    {
+        "codigo_comuna": 5705,
+        "nombre": "Putaendo",
+        "provincia": 57
+    },
+    {
+        "codigo_comuna": 5706,
+        "nombre": "Santa María",
+        "provincia": 57
+    },
+    {
+        "codigo_comuna": 5801,
+        "nombre": "Quilpué",
+        "provincia": 58
+    },
+    {
+        "codigo_comuna": 5802,
+        "nombre": "Limache",
+        "provincia": 58
+    },
+    {
+        "codigo_comuna": 5803,
+        "nombre": "Olmué",
+        "provincia": 58
+    },
+    {
+        "codigo_comuna": 5804,
+        "nombre": "Villa Alemana",
+        "provincia": 58
+    },
+    {
+        "codigo_comuna": 6101,
+        "nombre": "Rancagua",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6102,
+        "nombre": "Codegua",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6103,
+        "nombre": "Coinco",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6104,
+        "nombre": "Coltauco",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6105,
+        "nombre": "Doñihue",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6106,
+        "nombre": "Graneros",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6107,
+        "nombre": "Las Cabras",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6108,
+        "nombre": "Machalí",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6109,
+        "nombre": "Malloa",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6110,
+        "nombre": "Mostazal",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6111,
+        "nombre": "Olivar",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6112,
+        "nombre": "Peumo",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6113,
+        "nombre": "Pichidegua",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6114,
+        "nombre": "Quinta de Tilcoco",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6115,
+        "nombre": "Rengo",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6116,
+        "nombre": "Requínoa",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6117,
+        "nombre": "San Vicente de Tagua Tagua",
+        "provincia": 61
+    },
+    {
+        "codigo_comuna": 6201,
+        "nombre": "Pichilemu",
+        "provincia": 62
+    },
+    {
+        "codigo_comuna": 6202,
+        "nombre": "La Estrella",
+        "provincia": 62
+    },
+    {
+        "codigo_comuna": 6203,
+        "nombre": "Litueche",
+        "provincia": 62
+    },
+    {
+        "codigo_comuna": 6204,
+        "nombre": "Marchihue",
+        "provincia": 62
+    },
+    {
+        "codigo_comuna": 6205,
+        "nombre": "Navidad",
+        "provincia": 62
+    },
+    {
+        "codigo_comuna": 6206,
+        "nombre": "Paredones",
+        "provincia": 62
+    },
+    {
+        "codigo_comuna": 6301,
+        "nombre": "San Fernando",
+        "provincia": 63
+    },
+    {
+        "codigo_comuna": 6302,
+        "nombre": "Chépica",
+        "provincia": 63
+    },
+    {
+        "codigo_comuna": 6303,
+        "nombre": "Chimbarongo",
+        "provincia": 63
+    },
+    {
+        "codigo_comuna": 6304,
+        "nombre": "Lolol",
+        "provincia": 63
+    },
+    {
+        "codigo_comuna": 6305,
+        "nombre": "Nancagua",
+        "provincia": 63
+    },
+    {
+        "codigo_comuna": 6306,
+        "nombre": "Palmilla",
+        "provincia": 63
+    },
+    {
+        "codigo_comuna": 6307,
+        "nombre": "Peralillo",
+        "provincia": 63
+    },
+    {
+        "codigo_comuna": 6308,
+        "nombre": "Placilla",
+        "provincia": 63
+    },
+    {
+        "codigo_comuna": 6309,
+        "nombre": "Pumanque",
+        "provincia": 63
+    },
+    {
+        "codigo_comuna": 6310,
+        "nombre": "Santa Cruz",
+        "provincia": 63
+    },
+    {
+        "codigo_comuna": 7101,
+        "nombre": "Talca",
+        "provincia": 71
+    },
+    {
+        "codigo_comuna": 7102,
+        "nombre": "Constitución",
+        "provincia": 71
+    },
+    {
+        "codigo_comuna": 7103,
+        "nombre": "Curepto",
+        "provincia": 71
+    },
+    {
+        "codigo_comuna": 7104,
+        "nombre": "Empedrado",
+        "provincia": 71
+    },
+    {
+        "codigo_comuna": 7105,
+        "nombre": "Maule",
+        "provincia": 71
+    },
+    {
+        "codigo_comuna": 7106,
+        "nombre": "Pelarco",
+        "provincia": 71
+    },
+    {
+        "codigo_comuna": 7107,
+        "nombre": "Pencahue",
+        "provincia": 71
+    },
+    {
+        "codigo_comuna": 7108,
+        "nombre": "Río Claro",
+        "provincia": 71
+    },
+    {
+        "codigo_comuna": 7109,
+        "nombre": "San Clemente",
+        "provincia": 71
+    },
+    {
+        "codigo_comuna": 7110,
+        "nombre": "San Rafael",
+        "provincia": 71
+    },
+    {
+        "codigo_comuna": 7201,
+        "nombre": "Cauquenes",
+        "provincia": 72
+    },
+    {
+        "codigo_comuna": 7202,
+        "nombre": "Chanco",
+        "provincia": 72
+    },
+    {
+        "codigo_comuna": 7203,
+        "nombre": "Pelluhue",
+        "provincia": 72
+    },
+    {
+        "codigo_comuna": 7301,
+        "nombre": "Curicó",
+        "provincia": 73
+    },
+    {
+        "codigo_comuna": 7302,
+        "nombre": "Hualañé",
+        "provincia": 73
+    },
+    {
+        "codigo_comuna": 7303,
+        "nombre": "Licantén",
+        "provincia": 73
+    },
+    {
+        "codigo_comuna": 7304,
+        "nombre": "Molina",
+        "provincia": 73
+    },
+    {
+        "codigo_comuna": 7305,
+        "nombre": "Rauco",
+        "provincia": 73
+    },
+    {
+        "codigo_comuna": 7306,
+        "nombre": "Romeral",
+        "provincia": 73
+    },
+    {
+        "codigo_comuna": 7307,
+        "nombre": "Sagrada Familia",
+        "provincia": 73
+    },
+    {
+        "codigo_comuna": 7308,
+        "nombre": "Teno",
+        "provincia": 73
+    },
+    {
+        "codigo_comuna": 7309,
+        "nombre": "Vichuquén",
+        "provincia": 73
+    },
+    {
+        "codigo_comuna": 7401,
+        "nombre": "Linares",
+        "provincia": 74
+    },
+    {
+        "codigo_comuna": 7402,
+        "nombre": "Colbún",
+        "provincia": 74
+    },
+    {
+        "codigo_comuna": 7403,
+        "nombre": "Longaví",
+        "provincia": 74
+    },
+    {
+        "codigo_comuna": 7404,
+        "nombre": "Parral",
+        "provincia": 74
+    },
+    {
+        "codigo_comuna": 7405,
+        "nombre": "Retiro",
+        "provincia": 74
+    },
+    {
+        "codigo_comuna": 7406,
+        "nombre": "San Javier",
+        "provincia": 74
+    },
+    {
+        "codigo_comuna": 7407,
+        "nombre": "Villa Alegre",
+        "provincia": 74
+    },
+    {
+        "codigo_comuna": 7408,
+        "nombre": "Yerbas Buenas",
+        "provincia": 74
+    },
+    {
+        "codigo_comuna": 8101,
+        "nombre": "Concepción",
+        "provincia": 81
+    },
+    {
+        "codigo_comuna": 8102,
+        "nombre": "Coronel",
+        "provincia": 81
+    },
+    {
+        "codigo_comuna": 8103,
+        "nombre": "Chiguayante",
+        "provincia": 81
+    },
+    {
+        "codigo_comuna": 8104,
+        "nombre": "Florida",
+        "provincia": 81
+    },
+    {
+        "codigo_comuna": 8105,
+        "nombre": "Hualqui",
+        "provincia": 81
+    },
+    {
+        "codigo_comuna": 8106,
+        "nombre": "Lota",
+        "provincia": 81
+    },
+    {
+        "codigo_comuna": 8107,
+        "nombre": "Penco",
+        "provincia": 81
+    },
+    {
+        "codigo_comuna": 8108,
+        "nombre": "San Pedro de la Paz",
+        "provincia": 81
+    },
+    {
+        "codigo_comuna": 8109,
+        "nombre": "Santa Juana",
+        "provincia": 81
+    },
+    {
+        "codigo_comuna": 8110,
+        "nombre": "Talcahuano",
+        "provincia": 81
+    },
+    {
+        "codigo_comuna": 8111,
+        "nombre": "Tomé",
+        "provincia": 81
+    },
+    {
+        "codigo_comuna": 8112,
+        "nombre": "Hualpén",
+        "provincia": 81
+    },
+    {
+        "codigo_comuna": 8201,
+        "nombre": "Lebu",
+        "provincia": 82
+    },
+    {
+        "codigo_comuna": 8202,
+        "nombre": "Arauco",
+        "provincia": 82
+    },
+    {
+        "codigo_comuna": 8203,
+        "nombre": "Cañete",
+        "provincia": 82
+    },
+    {
+        "codigo_comuna": 8204,
+        "nombre": "Contulmo",
+        "provincia": 82
+    },
+    {
+        "codigo_comuna": 8205,
+        "nombre": "Curanilahue",
+        "provincia": 82
+    },
+    {
+        "codigo_comuna": 8206,
+        "nombre": "Los Álamos",
+        "provincia": 82
+    },
+    {
+        "codigo_comuna": 8207,
+        "nombre": "Tirúa",
+        "provincia": 82
+    },
+    {
+        "codigo_comuna": 8301,
+        "nombre": "Los Ángeles",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8302,
+        "nombre": "Antuco",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8303,
+        "nombre": "Cabrero",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8304,
+        "nombre": "Laja",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8305,
+        "nombre": "Mulchén",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8306,
+        "nombre": "Nacimiento",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8307,
+        "nombre": "Negrete",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8308,
+        "nombre": "Quilaco",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8309,
+        "nombre": "Quilleco",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8310,
+        "nombre": "San Rosendo",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8311,
+        "nombre": "Santa Bárbara",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8312,
+        "nombre": "Tucapel",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8313,
+        "nombre": "Yumbel",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 8314,
+        "nombre": "Alto Biobío",
+        "provincia": 83
+    },
+    {
+        "codigo_comuna": 16101,
+        "nombre": "Chillán",
+        "provincia": 161
+    },
+    {
+        "codigo_comuna": 16102,
+        "nombre": "Bulnes",
+        "provincia": 161
+    },
+    {
+        "codigo_comuna": 16202,
+        "nombre": "Cobquecura",
+        "provincia": 162
+    },
+    {
+        "codigo_comuna": 16203,
+        "nombre": "Coelemu",
+        "provincia": 162
+    },
+    {
+        "codigo_comuna": 16302,
+        "nombre": "Coihueco",
+        "provincia": 163
+    },
+    {
+        "codigo_comuna": 16103,
+        "nombre": "Chillán Viejo",
+        "provincia": 161
+    },
+    {
+        "codigo_comuna": 16104,
+        "nombre": "El Carmen",
+        "provincia": 161
+    },
+    {
+        "codigo_comuna": 16204,
+        "nombre": "Ninhue",
+        "provincia": 162
+    },
+    {
+        "codigo_comuna": 16303,
+        "nombre": "Ñiquén",
+        "provincia": 163
+    },
+    {
+        "codigo_comuna": 16105,
+        "nombre": "Pemuco",
+        "provincia": 161
+    },
+    {
+        "codigo_comuna": 16106,
+        "nombre": "Pinto",
+        "provincia": 161
+    },
+    {
+        "codigo_comuna": 16205,
+        "nombre": "Portezuelo",
+        "provincia": 162
+    },
+    {
+        "codigo_comuna": 16107,
+        "nombre": "Quillón",
+        "provincia": 161
+    },
+    {
+        "codigo_comuna": 16201,
+        "nombre": "Quirihue",
+        "provincia": 162
+    },
+    {
+        "codigo_comuna": 16206,
+        "nombre": "Ránquil",
+        "provincia": 162
+    },
+    {
+        "codigo_comuna": 16301,
+        "nombre": "San Carlos",
+        "provincia": 163
+    },
+    {
+        "codigo_comuna": 16304,
+        "nombre": "San Fabián",
+        "provincia": 163
+    },
+    {
+        "codigo_comuna": 16108,
+        "nombre": "San Ignacio",
+        "provincia": 161
+    },
+    {
+        "codigo_comuna": 16305,
+        "nombre": "San Nicolás",
+        "provincia": 163
+    },
+    {
+        "codigo_comuna": 16207,
+        "nombre": "Treguaco",
+        "provincia": 162
+    },
+    {
+        "codigo_comuna": 16109,
+        "nombre": "Yungay",
+        "provincia": 161
+    },
+    {
+        "codigo_comuna": 9101,
+        "nombre": "Temuco",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9102,
+        "nombre": "Carahue",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9103,
+        "nombre": "Cunco",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9104,
+        "nombre": "Curarrehue",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9105,
+        "nombre": "Freire",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9106,
+        "nombre": "Galvarino",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9107,
+        "nombre": "Gorbea",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9108,
+        "nombre": "Lautaro",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9109,
+        "nombre": "Loncoche",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9110,
+        "nombre": "Melipeuco",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9111,
+        "nombre": "Nueva Imperial",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9112,
+        "nombre": "Padre Las Casas",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9113,
+        "nombre": "Perquenco",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9114,
+        "nombre": "Pitrufquén",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9115,
+        "nombre": "Pucón",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9116,
+        "nombre": "Saavedra",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9117,
+        "nombre": "Teodoro Schmidt",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9118,
+        "nombre": "Toltén",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9119,
+        "nombre": "Vilcún",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9120,
+        "nombre": "Villarrica",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9121,
+        "nombre": "Cholchol",
+        "provincia": 91
+    },
+    {
+        "codigo_comuna": 9201,
+        "nombre": "Angol",
+        "provincia": 92
+    },
+    {
+        "codigo_comuna": 9202,
+        "nombre": "Collipulli",
+        "provincia": 92
+    },
+    {
+        "codigo_comuna": 9203,
+        "nombre": "Curacautín",
+        "provincia": 92
+    },
+    {
+        "codigo_comuna": 9204,
+        "nombre": "Ercilla",
+        "provincia": 92
+    },
+    {
+        "codigo_comuna": 9205,
+        "nombre": "Lonquimay",
+        "provincia": 92
+    },
+    {
+        "codigo_comuna": 9206,
+        "nombre": "Los Sauces",
+        "provincia": 92
+    },
+    {
+        "codigo_comuna": 9207,
+        "nombre": "Lumaco",
+        "provincia": 92
+    },
+    {
+        "codigo_comuna": 9208,
+        "nombre": "Purén",
+        "provincia": 92
+    },
+    {
+        "codigo_comuna": 9209,
+        "nombre": "Renaico",
+        "provincia": 92
+    },
+    {
+        "codigo_comuna": 9210,
+        "nombre": "Traiguén",
+        "provincia": 92
+    },
+    {
+        "codigo_comuna": 9211,
+        "nombre": "Victoria",
+        "provincia": 92
+    },
+    {
+        "codigo_comuna": 14101,
+        "nombre": "Valdivia",
+        "provincia": 141
+    },
+    {
+        "codigo_comuna": 14102,
+        "nombre": "Corral",
+        "provincia": 141
+    },
+    {
+        "codigo_comuna": 14103,
+        "nombre": "Lanco",
+        "provincia": 141
+    },
+    {
+        "codigo_comuna": 14104,
+        "nombre": "Los Lagos",
+        "provincia": 141
+    },
+    {
+        "codigo_comuna": 14105,
+        "nombre": "Máfil",
+        "provincia": 141
+    },
+    {
+        "codigo_comuna": 14106,
+        "nombre": "Mariquina",
+        "provincia": 141
+    },
+    {
+        "codigo_comuna": 14107,
+        "nombre": "Paillaco",
+        "provincia": 141
+    },
+    {
+        "codigo_comuna": 14108,
+        "nombre": "Panguipulli",
+        "provincia": 141
+    },
+    {
+        "codigo_comuna": 14201,
+        "nombre": "La Unión",
+        "provincia": 142
+    },
+    {
+        "codigo_comuna": 14202,
+        "nombre": "Futrono",
+        "provincia": 142
+    },
+    {
+        "codigo_comuna": 14203,
+        "nombre": "Lago Ranco",
+        "provincia": 142
+    },
+    {
+        "codigo_comuna": 14204,
+        "nombre": "Río Bueno",
+        "provincia": 142
+    },
+    {
+        "codigo_comuna": 10101,
+        "nombre": "Puerto Montt",
+        "provincia": 101
+    },
+    {
+        "codigo_comuna": 10102,
+        "nombre": "Calbuco",
+        "provincia": 101
+    },
+    {
+        "codigo_comuna": 10103,
+        "nombre": "Cochamó",
+        "provincia": 101
+    },
+    {
+        "codigo_comuna": 10104,
+        "nombre": "Fresia",
+        "provincia": 101
+    },
+    {
+        "codigo_comuna": 10105,
+        "nombre": "Frutillar",
+        "provincia": 101
+    },
+    {
+        "codigo_comuna": 10106,
+        "nombre": "Los Muermos",
+        "provincia": 101
+    },
+    {
+        "codigo_comuna": 10107,
+        "nombre": "Llanquihue",
+        "provincia": 101
+    },
+    {
+        "codigo_comuna": 10108,
+        "nombre": "Maullín",
+        "provincia": 101
+    },
+    {
+        "codigo_comuna": 10109,
+        "nombre": "Puerto Varas",
+        "provincia": 101
+    },
+    {
+        "codigo_comuna": 10201,
+        "nombre": "Castro",
+        "provincia": 102
+    },
+    {
+        "codigo_comuna": 10202,
+        "nombre": "Ancud",
+        "provincia": 102
+    },
+    {
+        "codigo_comuna": 10203,
+        "nombre": "Chonchi",
+        "provincia": 102
+    },
+    {
+        "codigo_comuna": 10204,
+        "nombre": "Curaco de Vélez",
+        "provincia": 102
+    },
+    {
+        "codigo_comuna": 10205,
+        "nombre": "Dalcahue",
+        "provincia": 102
+    },
+    {
+        "codigo_comuna": 10206,
+        "nombre": "Puqueldón",
+        "provincia": 102
+    },
+    {
+        "codigo_comuna": 10207,
+        "nombre": "Queilén",
+        "provincia": 102
+    },
+    {
+        "codigo_comuna": 10208,
+        "nombre": "Quellón",
+        "provincia": 102
+    },
+    {
+        "codigo_comuna": 10209,
+        "nombre": "Quemchi",
+        "provincia": 102
+    },
+    {
+        "codigo_comuna": 10210,
+        "nombre": "Quinchao",
+        "provincia": 102
+    },
+    {
+        "codigo_comuna": 10301,
+        "nombre": "Osorno",
+        "provincia": 103
+    },
+    {
+        "codigo_comuna": 10302,
+        "nombre": "Puerto Octay",
+        "provincia": 103
+    },
+    {
+        "codigo_comuna": 10303,
+        "nombre": "Purranque",
+        "provincia": 103
+    },
+    {
+        "codigo_comuna": 10304,
+        "nombre": "Puyehue",
+        "provincia": 103
+    },
+    {
+        "codigo_comuna": 10305,
+        "nombre": "Río Negro",
+        "provincia": 103
+    },
+    {
+        "codigo_comuna": 10306,
+        "nombre": "San Juan De La Costa",
+        "provincia": 103
+    },
+    {
+        "codigo_comuna": 10307,
+        "nombre": "San Pablo",
+        "provincia": 103
+    },
+    {
+        "codigo_comuna": 10401,
+        "nombre": "Chaitén",
+        "provincia": 104
+    },
+    {
+        "codigo_comuna": 10402,
+        "nombre": "Futaleufú",
+        "provincia": 104
+    },
+    {
+        "codigo_comuna": 10403,
+        "nombre": "Palena",
+        "provincia": 104
+    },
+    {
+        "codigo_comuna": 11101,
+        "nombre": "Coihaique",
+        "provincia": 111
+    },
+    {
+        "codigo_comuna": 11102,
+        "nombre": "Lago Verde",
+        "provincia": 111
+    },
+    {
+        "codigo_comuna": 11201,
+        "nombre": "Aisén",
+        "provincia": 112
+    },
+    {
+        "codigo_comuna": 11202,
+        "nombre": "Cisnes",
+        "provincia": 112
+    },
+    {
+        "codigo_comuna": 11203,
+        "nombre": "Guaitecas",
+        "provincia": 112
+    },
+    {
+        "codigo_comuna": 11301,
+        "nombre": "Cochrane",
+        "provincia": 113
+    },
+    {
+        "codigo_comuna": 11302,
+        "nombre": "O'Higgins",
+        "provincia": 113
+    },
+    {
+        "codigo_comuna": 11303,
+        "nombre": "Tortel",
+        "provincia": 113
+    },
+    {
+        "codigo_comuna": 11401,
+        "nombre": "Chile Chico",
+        "provincia": 114
+    },
+    {
+        "codigo_comuna": 11402,
+        "nombre": "Río Ibáñez",
+        "provincia": 114
+    },
+    {
+        "codigo_comuna": 12101,
+        "nombre": "Punta Arenas",
+        "provincia": 121
+    },
+    {
+        "codigo_comuna": 12102,
+        "nombre": "Laguna Blanca",
+        "provincia": 121
+    },
+    {
+        "codigo_comuna": 12103,
+        "nombre": "Río Verde",
+        "provincia": 121
+    },
+    {
+        "codigo_comuna": 12104,
+        "nombre": "San Gregorio",
+        "provincia": 121
+    },
+    {
+        "codigo_comuna": 12201,
+        "nombre": "Cabo de Hornos",
+        "provincia": 122
+    },
+    {
+        "codigo_comuna": 12202,
+        "nombre": "Antártica",
+        "provincia": 122
+    },
+    {
+        "codigo_comuna": 12301,
+        "nombre": "Porvenir",
+        "provincia": 123
+    },
+    {
+        "codigo_comuna": 12302,
+        "nombre": "Primavera",
+        "provincia": 123
+    },
+    {
+        "codigo_comuna": 12303,
+        "nombre": "Timaukel",
+        "provincia": 123
+    },
+    {
+        "codigo_comuna": 12401,
+        "nombre": "Natales",
+        "provincia": 124
+    },
+    {
+        "codigo_comuna": 12402,
+        "nombre": "Torres del Paine",
+        "provincia": 124
+    },
+    {
+        "codigo_comuna": 13101,
+        "nombre": "Santiago",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13102,
+        "nombre": "Cerrillos",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13103,
+        "nombre": "Cerro Navia",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13104,
+        "nombre": "Conchalí",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13105,
+        "nombre": "El Bosque",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13106,
+        "nombre": "Estación Central",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13107,
+        "nombre": "Huechuraba",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13108,
+        "nombre": "Independencia",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13109,
+        "nombre": "La Cisterna",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13110,
+        "nombre": "La Florida",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13111,
+        "nombre": "La Granja",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13112,
+        "nombre": "La Pintana",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13113,
+        "nombre": "La Reina",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13114,
+        "nombre": "Las Condes",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13115,
+        "nombre": "Lo Barnechea",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13116,
+        "nombre": "Lo Espejo",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13117,
+        "nombre": "Lo Prado",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13118,
+        "nombre": "Macul",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13119,
+        "nombre": "Maipú",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13120,
+        "nombre": "Ñuñoa",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13121,
+        "nombre": "Pedro Aguirre Cerda",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13122,
+        "nombre": "Peñalolén",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13123,
+        "nombre": "Providencia",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13124,
+        "nombre": "Pudahuel",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13125,
+        "nombre": "Quilicura",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13126,
+        "nombre": "Quinta Normal",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13127,
+        "nombre": "Recoleta",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13128,
+        "nombre": "Renca",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13129,
+        "nombre": "San Joaquín",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13130,
+        "nombre": "San Miguel",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13131,
+        "nombre": "San Ramón",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13132,
+        "nombre": "Vitacura",
+        "provincia": 131
+    },
+    {
+        "codigo_comuna": 13201,
+        "nombre": "Puente Alto",
+        "provincia": 132
+    },
+    {
+        "codigo_comuna": 13202,
+        "nombre": "Pirque",
+        "provincia": 132
+    },
+    {
+        "codigo_comuna": 13203,
+        "nombre": "San José de Maipo",
+        "provincia": 132
+    },
+    {
+        "codigo_comuna": 13301,
+        "nombre": "Colina",
+        "provincia": 133
+    },
+    {
+        "codigo_comuna": 13302,
+        "nombre": "Lampa",
+        "provincia": 133
+    },
+    {
+        "codigo_comuna": 13303,
+        "nombre": "Tiltil",
+        "provincia": 133
+    },
+    {
+        "codigo_comuna": 13401,
+        "nombre": "San Bernardo",
+        "provincia": 134
+    },
+    {
+        "codigo_comuna": 13402,
+        "nombre": "Buin",
+        "provincia": 134
+    },
+    {
+        "codigo_comuna": 13403,
+        "nombre": "Calera de Tango",
+        "provincia": 134
+    },
+    {
+        "codigo_comuna": 13404,
+        "nombre": "Paine",
+        "provincia": 134
+    },
+    {
+        "codigo_comuna": 13501,
+        "nombre": "Melipilla",
+        "provincia": 135
+    },
+    {
+        "codigo_comuna": 13502,
+        "nombre": "Alhué",
+        "provincia": 135
+    },
+    {
+        "codigo_comuna": 13503,
+        "nombre": "Curacaví",
+        "provincia": 135
+    },
+    {
+        "codigo_comuna": 13504,
+        "nombre": "María Pinto",
+        "provincia": 135
+    },
+    {
+        "codigo_comuna": 13505,
+        "nombre": "San Pedro",
+        "provincia": 135
+    },
+    {
+        "codigo_comuna": 13601,
+        "nombre": "Talagante",
+        "provincia": 136
+    },
+    {
+        "codigo_comuna": 13602,
+        "nombre": "El Monte",
+        "provincia": 136
+    },
+    {
+        "codigo_comuna": 13603,
+        "nombre": "Isla de Maipo",
+        "provincia": 136
+    },
+    {
+        "codigo_comuna": 13604,
+        "nombre": "Padre Hurtado",
+        "provincia": 136
+    },
+    {
+        "codigo_comuna": 13605,
+        "nombre": "Peñaflor",
+        "provincia": 136
+    }
+]

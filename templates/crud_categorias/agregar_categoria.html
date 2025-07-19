@@ -1,0 +1,73 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4 text-dark">Agregar Categoría</h1>
+        
+        <!-- Formulario estilizado dentro de una tarjeta -->
+        <div class="form-container shadow p-4 rounded" style="max-width: 700px; margin: auto; background-color: #ffffff;">
+            <form class="agregarCategoria-form" action="{% url 'agregarCategoria' %}" method="POST" enctype="multipart/form-data" style="font-size: 0.9rem;">
+                {% csrf_token %}
+
+                <!-- Nombre de la Categoría -->
+                <div class="form-group">
+                    <label for="nombre"><strong>Nombre</strong></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-light">
+                                <i class="fa fa-address-card text-secondary"></i>
+                            </div>
+                        </div>
+                        <input 
+                            id="nombre" 
+                            name="nombre" 
+                            type="text" 
+                            class="form-control rounded-pill" 
+                            placeholder="Ingrese el nombre de la categoría" 
+                            required>
+                    </div>
+                </div>
+
+                <!-- Descripción -->
+                <div class="form-group">
+                    <label for="descripcion"><strong>Descripción</strong></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-light">
+                                <i class="fa fa-inbox text-secondary"></i>
+                            </div>
+                        </div>
+                        <textarea 
+                            id="descripcion" 
+                            name="descripcion" 
+                            class="form-control rounded" 
+                            placeholder="Ingrese una descripción" 
+                            rows="2" 
+                            style="resize: none;"></textarea>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="text-center mt-4">
+                    <a href="{% url 'listarCategoria' %}" class="btn btn-secondary btn-sm rounded-pill">
+                        <i class="fa fa-arrow-left"></i> Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-success btn-sm rounded-pill">
+                        <i class="fa fa-plus"></i> Agregar Categoría
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('imagen').addEventListener('change', function (event) {
+        const fileName = event.target.files[0]?.name || "Seleccionar archivo";
+        event.target.nextElementSibling.textContent = fileName;
+    });
+</script>
+{% endblock %}

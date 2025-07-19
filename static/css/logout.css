@@ -1,0 +1,26 @@
+.btn-logout {
+    background-color: white; /* Color de fondo blanco */
+    border: none;
+    color: rgb(0, 0, 0); /* Color del texto */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+
+
+.sidebar-footer-white {
+    display: flex; /* Usar flexbox para alinear el contenido */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    padding: 10px; /* Espaciado interno opcional */
+    border-top: 1px solid #ccc; /* Borde superior opcional */
+    background-color: white; /* Color de fondo blanco */
+}
+
+
+.btn-logout-35 {
+    background-color: #343a40; /* Color de fondo blanco */
+    border: none;
+    color: rgb(255, 255, 255); /* Color del texto */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+

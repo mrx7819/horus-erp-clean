@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'images/TECNOLO.png' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'css/registro.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-section"></div>
+        <div class="right-section">
+            <h1>¡Hola! Regístrate para comenzar</h1>
+            <form id="registration-form" action="{% url 'registro' %}" method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <!-- Campo Nombre -->
+                    <input type="text" name="first_name" placeholder="Nombre" required>
+                    <!-- Campo Apellido -->
+                    <input type="text" name="last_name" placeholder="Apellido" required>
+                </div>
+                <div class="form-row">
+                    <!-- Campo Email -->
+                    <input type="email" name="email" placeholder="Correo" required>
+                    <!-- Campo Empresa -->
+                    <input type="text" name="empresa" placeholder="Empresa" required>
+                </div>
+                <div class="form-row">
+                    <!-- Campo RUT Empresa -->
+                    <input type="text" name="rut_empresa" placeholder="RUT Empresa" required>
+                </div>
+                <div class="form-row">
+                    <!-- Campo Contraseña -->
+                    <input type="password" name="password1" placeholder="Contraseña" required>
+                    <!-- Campo Confirmar Contraseña -->
+                    <input type="password" name="password2" placeholder="Repetir contraseña" required>
+                </div>
+                <div class="terms">
+                    <input type="checkbox" id="terms" name="terms">
+                    <label for="terms">Acepta los <a href="{% url 'term_cond' %}">Términos y Condiciones</a> para crear tu cuenta</label>
+                </div>
+                <button type="submit">Registrarme</button>
+            </form>
+            <div class="social-login">
+                <button class="google">Continúa con Google</button>
+                <button class="apple">Continúa con Apple</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtiene el formulario
+            const registrationForm = document.getElementById('registration-form');
+            
+            // Agrega el evento de envío
+            registrationForm.addEventListener('submit', function(event) {
+                // Obtiene el checkbox de términos
+                const termsCheckbox = document.getElementById('terms');
+                
+                // Verifica si el checkbox está marcado
+                if (!termsCheckbox.checked) {
+                    event.preventDefault(); // Detiene el envío del formulario
+                    
+                    // Muestra el mensaje con SweetAlert2
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '¡Atención!',
+                        text: 'Debes aceptar los términos y condiciones para continuar.',
+                        confirmButtonText: 'Entendido',
+                    });
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>

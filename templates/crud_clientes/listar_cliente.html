@@ -1,0 +1,127 @@
+{% extends '../index_master.html' %}
+{% load static %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Clientes</h1>
+        <div class="mb-3">
+            <form method="POST" action="" class="d-flex flex-column flex-md-row align-items-start">
+                {% csrf_token %}
+                <div class="input-group mb-2 mb-md-0" style="width: 250px; margin-right: 7px;">
+                    <input 
+                        type="text" 
+                        name="keyword" 
+                        class="form-control" 
+                        placeholder="Buscar cliente" 
+                        aria-label="Buscar cliente" 
+                        value="{{ request.POST.keyword|default_if_none:'' }}"
+                    >
+                </div>
+                <button class="btn btn-dark mb-2 mb-md-0 me-md-2" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+                <a href="{% url 'agregarCliente' %}" class="btn btn-success">
+                    <i class="fa fa-user-plus"></i> Agregar Cliente
+                </a>
+            </form>
+        </div>
+        
+        
+        
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-sm d-none d-md-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">RUT</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Fecha de Nacimiento</th>
+                        <th scope="col">Fecha de Creación</th>
+                        <th scope="col">Género</th>
+                        <th scope="col">Interacción</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td>{{ cliente.id }}</td>
+                        <td>{{ cliente.rut }}</td>
+                        <td>{{ cliente.nombre }}</td>
+                        <td>{{ cliente.apellido }}</td>
+                        <td>{{ cliente.direccion }}</td>
+                        <td>{{ cliente.telefono }}</td>
+                        <td>{{ cliente.email }}</td>
+                        <td>{{ cliente.fecha_nacimiento|date:"d/m/Y" }}</td>
+                        <td>{{ cliente.fecha_creacion|date:"d/m/Y" }}</td>
+                        <td>{{ cliente.genero }}</td>
+                        <td>
+                            {% for interaccion in cliente.interaccioncliente_set.all %}
+                                <div>
+                                    {{ interaccion.tipo_interaccion }}
+                                </div>
+                            {% empty %}
+                                No hay interacciones.
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <button class="btn btn-warning btn-sm" onclick="window.location.href='/modificarCliente/{{ cliente.id }}'">
+                                <i class="fa fa-refresh"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="window.location.href='/eliminarCliente/{{ cliente.id }}'">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="10" class="text-center">No hay clientes disponibles.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- Estructura para dispositivos móviles -->
+            <div class="d-md-none">
+                {% for cliente in clientes %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Cliente ID: {{ cliente.id }}</h5>
+                        <p class="card-text"><strong>Nombre:</strong> {{ cliente.nombre }}</p>
+                        <p class="card-text"><strong>Apellido:</strong> {{ cliente.apellido }}</p>
+                        <p class="card-text"><strong>Teléfono:</strong> {{ cliente.telefono }}</p>
+                        <p class="card-text"><strong>Email:</strong> {{ cliente.email }}</p>
+                        <p class="card-text"><strong>Fecha de Nacimiento:</strong> {{ cliente.fecha_nacimiento|date:"d/m/Y" }}</p>
+                        <p class="card-text"><strong>Fecha de Creación:</strong> {{ cliente.fecha_creacion|date:"d/m/Y" }}</p>
+                        <p class="card-text"><strong>Género:</strong> {{ cliente.genero }}</p>
+                        <p class="card-text"><strong>Interacción:</strong>
+                            {% for interaccion in cliente.interaccioncliente_set.all %}
+                                <div>{{ interaccion.tipo_interaccion }}</div>
+                            {% empty %}
+                                No hay interacciones.
+                            {% endfor %}
+                        </p>
+                        <div>
+                            <button class="btn btn-warning btn-sm" onclick="window.location.href='/modificarCliente/{{ cliente.id }}'">
+                                <i class="fa fa-refresh"></i> Modificar
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="window.location.href='/eliminarCliente/{{ cliente.id }}'">
+                                <i class="fa fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="alert alert-warning" role="alert">No hay clientes disponibles.</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

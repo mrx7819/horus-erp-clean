@@ -1,0 +1,296 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% block content %}
+<!-- Reorganización del formulario -->
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <div class="alert text-center">
+            <h3><strong>Agregar Producto</strong></h3>
+            <p>Llena los campos a continuación para registrar un nuevo producto.</p>
+        </div>
+
+        <div class="card shadow-lg p-4 rounded" style="max-width: 800px; margin: auto; background-color: #ffffff;">
+            <form id="add-product-form" class="agregarProducto-form" action="{% url 'agregarProducto' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- SKU y Nombre -->
+                <div class="row mb-3">
+                    <div class="form-group col-lg-6 col-md-12">
+                        <label for="sku"><strong>SKU</strong></label>
+                        <input 
+                            type="text" 
+                            class="form-control rounded-pill" 
+                            id="sku" 
+                            name="sku" 
+                            placeholder="Ingrese el SKU" 
+                            maxlength="50" 
+                            required>
+                    </div>
+
+                    <div class="form-group col-lg-6 col-md-12">
+                        <label for="nombre"><strong>Nombre</strong></label>
+                        <input 
+                            type="text" 
+                            class="form-control rounded-pill" 
+                            id="nombre" 
+                            name="nombre" 
+                            placeholder="Ingrese el nombre del producto" 
+                            required>
+                    </div>
+                </div>
+
+                <!-- Categoría y Proveedor -->
+                <div class="row mb-3">
+                    <div class="form-group col-lg-6 col-md-12">
+                        <label for="categoria"><strong>Categoría</strong></label>
+                        <select class="form-control rounded-pill" id="categoria" name="categoria" required>
+                            {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group col-lg-6 col-md-12">
+                        <label for="proveedor"><strong>Proveedor</strong></label>
+                        <select class="form-control rounded-pill" id="proveedor" name="proveedor" required>
+                            {% for proveedor in proveedores %}
+                                <option value="{{ proveedor.id }}">{{ proveedor.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Precios -->
+                <div class="row mb-3">
+                    <div class="form-group col-lg-4 col-md-6">
+                        <label for="precio_compra_sin_iva"><strong>Precio de Compra (sin IVA)</strong></label>
+                        <input 
+                            type="number" 
+                            class="form-control rounded-pill" 
+                            id="precio_compra_sin_iva" 
+                            name="precio_compra_sin_iva" 
+                            placeholder="Ingrese el precio sin IVA" 
+                            step="0.01" 
+                            required>
+                    </div>
+
+                    <div class="form-group col-lg-4 col-md-6">
+                        <label for="precio_compra"><strong>Precio de Compra (con IVA)</strong></label>
+                        <input 
+                            type="number" 
+                            class="form-control rounded-pill bg-light" 
+                            id="precio_compra" 
+                            name="precio_compra" 
+                            placeholder="Calculado automáticamente" 
+                            readonly>
+                    </div>
+
+                    <div class="form-group col-lg-4 col-md-12">
+                        <label for="precio_venta"><strong>Precio de Venta</strong></label>
+                        <input 
+                            type="number" 
+                            class="form-control rounded-pill" 
+                            id="precio_venta" 
+                            name="precio_venta" 
+                            placeholder="Ingrese el precio de venta" 
+                            step="0.01" 
+                            required>
+                    </div>
+                </div>
+
+                <!-- IVA y % Ganancia -->
+                <div class="row mb-3">
+                    <div class="form-group col-lg-6 col-md-6">
+                        <label for="iva"><strong>IVA (%)</strong></label>
+                        <input 
+                            type="number" 
+                            class="form-control rounded-pill" 
+                            id="iva" 
+                            name="iva" 
+                            value="19.00" 
+                            step="0.01" 
+                            readonly>
+                    </div>
+
+                    <div class="form-group col-lg-6 col-md-6">
+                        <label for="porc_ganancias"><strong>% Ganancia</strong></label>
+                        <input 
+                            type="text" 
+                            class="form-control rounded-pill" 
+                            id="porc_ganancias" 
+                            name="porc_ganancias" 
+                            placeholder="Calculado automáticamente" 
+                            readonly>
+                    </div>
+                </div>
+
+                <!-- Cantidad y Bodega -->
+                <div class="row mb-3">
+                    <div class="form-group col-lg-6 col-md-12">
+                        <label for="cantidad"><strong>Cantidad</strong></label>
+                        <input 
+                            type="number" 
+                            class="form-control rounded-pill" 
+                            id="cantidad" 
+                            name="cantidad" 
+                            placeholder="Ingrese la cantidad disponible" 
+                            required>
+                    </div>
+
+                    <div class="form-group col-lg-6 col-md-12">
+                        <label for="bodega"><strong>Bodega</strong></label>
+                        {% if bodegas %}
+                            <select class="form-control rounded-pill" id="bodega" name="bodega" required>
+                                {% for bodega in bodegas %}
+                                    <option value="{{ bodega.id }}">{{ bodega.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <p class="text-danger">No hay bodegas disponibles.</p>
+                            <a href="{% url 'agregarBodega' %}" class="btn btn-sm btn-outline-primary">Agregar Bodega</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Imagen -->
+                <div class="row mb-3">
+                    <div class="form-group col-md-12">
+                        <label for="imagen"><strong>Imagen del Producto</strong></label>
+                        <input 
+                            type="file" 
+                            class="form-control rounded-pill" 
+                            id="imagen" 
+                            name="imagen" 
+                            accept="image/*" 
+                            required>
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="text-center mt-4">
+                    <a href="{% url 'listarProducto' %}" class="btn btn-secondary btn-sm rounded-pill">
+                        <i class="fa fa-arrow-left"></i> Volver
+                    </a>
+                    <button type="submit" class="btn btn-success btn-sm rounded-pill">
+                        <i class="fa fa-plus"></i> Agregar Producto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+<script id="capacidades-data" type="application/json">
+    {{ capacidades|safe }}
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lee el JSON seguro desde el script
+        const bodegaCapacidades = JSON.parse(document.getElementById('capacidades-data').textContent);
+        console.log('Datos de bodegaCapacidades cargados:', bodegaCapacidades);
+
+        const bodegaSelect = document.getElementById('bodega');
+        const cantidadInput = document.getElementById('cantidad');
+        const form = document.getElementById('add-product-form');
+
+        form.addEventListener('submit', function (e) {
+            const bodegaId = bodegaSelect.value;
+            const cantidad = parseInt(cantidadInput.value);
+
+            console.log('Bodega seleccionada:', bodegaId);
+            console.log('Cantidad ingresada:', cantidad);
+
+            if (bodegaId) {
+                const capacidadDisponible = bodegaCapacidades[bodegaId];
+                console.log('Capacidad disponible para la bodega:', capacidadDisponible);
+
+                if (capacidadDisponible === 0) {
+                    // Capacidad es 0, mostrar mensaje de actualización o creación
+                    e.preventDefault(); // Detenemos el envío del formulario
+                    Swal.fire({
+                        title: 'Capacidad Insuficiente',
+                        text: 'La bodega seleccionada no tiene capacidad disponible. Por favor, actualiza su capacidad o crea una nueva bodega.',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    }).then(() => {
+                        console.log('El usuario fue notificado de la capacidad insuficiente.');
+                        bodegaSelect.focus(); // Enfocar el campo de selección de bodega
+                    });
+                } else if (cantidad > capacidadDisponible) {
+                    // Cantidad excede la capacidad disponible
+                    e.preventDefault(); // Detenemos el envío del formulario
+                    Swal.fire({
+                        title: 'Capacidad Excedida',
+                        text: `La cantidad máxima permitida para esta bodega es ${capacidadDisponible}. Por favor, ingresa un número válido.`,
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    }).then(() => {
+                        console.log('El usuario será forzado a ingresar un número válido.');
+                        cantidadInput.focus(); // Enfocar el campo de entrada para corregir
+                        cantidadInput.value = ''; // Limpia el valor del campo
+                    });
+                } else {
+                    console.log('La cantidad ingresada está dentro de los límites permitidos.');
+                }
+            } else {
+                console.error('Datos inválidos: Bodega no seleccionada.');
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Datos Inválidos',
+                    text: 'Por favor, selecciona una bodega válida.',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        });
+    });
+</script>
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    // Elementos del DOM
+    const precioCompraSinIVAInput = document.getElementById('precio_compra_sin_iva');
+    const precioCompraConIVAInput = document.getElementById('precio_compra');
+    const precioVentaInput = document.getElementById('precio_venta');
+    const porcGananciasInput = document.getElementById('porc_ganancias');
+    const ivaInput = document.getElementById('iva');
+
+    // Función para calcular precios y ganancias
+    function calcularPrecios() {
+        // Obtén el valor de precio sin IVA e IVA
+        const precioCompraSinIVA = parseFloat(precioCompraSinIVAInput.value) || 0; // 0 si no hay valor válido
+        const iva = parseFloat(ivaInput.value) / 100 || 0; // 0 si no hay IVA válido
+
+        // Calcula precio de compra con IVA
+        const precioCompraConIVA = precioCompraSinIVA * (1 + iva);
+        precioCompraConIVAInput.value = precioCompraConIVA.toFixed(2); // Actualiza el campo
+
+        // Obtén el precio de venta
+        const precioVenta = parseFloat(precioVentaInput.value) || 0;
+
+        // Calcula el porcentaje de ganancias si es posible
+        if (precioVenta > 0 && precioCompraConIVA > 0) {
+            const margen = ((precioVenta - precioCompraConIVA) / precioCompraConIVA) * 100;
+            porcGananciasInput.value = margen.toFixed(2) + '%'; // Actualiza el campo
+        } else {
+            porcGananciasInput.value = ''; // Limpia si no es posible calcular
+        }
+    }
+
+    // Agregar eventos a los inputs relevantes
+    precioCompraSinIVAInput.addEventListener('input', calcularPrecios);
+    precioVentaInput.addEventListener('input', calcularPrecios);
+});
+
+</script>
+
+{% endblock %}

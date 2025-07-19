@@ -1,0 +1,94 @@
+{% extends '../index_master.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<div class="right_col" role="main">
+    <div class="table">
+        <section class="table__header">
+            <h1>Productos</h1>
+            <div class="input-group">
+                <input type="search" placeholder="Buscar productos..." oninput="searchTable()">
+            </div>
+            <a href="{% url 'agregarProducto' %}" class="btn btn-success mb-3">
+                <i class="fa fa-plus"></i> Agregar Producto
+            </a>
+        </section>
+
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Proveedor</th>
+                        <th>Precio Compra</th>
+                        <th>Precio Venta</th>
+                        <th>Cantidad</th>
+                        <th>Stock</th>
+                        <th>Bodega</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in productos %}
+                    <tr>
+                        <td data-label="SKU">{{ p.sku }}</td>
+                        <td data-label="Nombre">{{ p.nombre }}</td>
+                        <td data-label="Categoría">{{ p.categoria.nombre }}</td>
+                        <td data-label="Proveedor">{{ p.proveedor.nombre }}</td>
+                        <td data-label="Precio Compra">${{ p.precio_compra|floatformat:0|intcomma }}</td>
+                        <td data-label="Precio Venta">${{ p.precio_venta|floatformat:0|intcomma }}</td>
+                        <td data-label="Cantidad">{{ p.cantidad }}</td>
+                        <td data-label="Stock">
+                            {% if p.cantidad > 15 %}
+                            <p class="status delivered">Disponible</p>
+                            {% else %}
+                            <p class="status out-of-stock">Sin stock</p>
+                            {% endif %}
+                        </td>
+                        <td data-label="Bodega">{{ p.bodega.nombre }}</td>
+                        <td data-label="Imagen">
+                            {% if p.img %}
+                            <img src="{{ p.img.url }}" alt="{{ p.nombre }}">
+                            {% else %}
+                            <span>No imagen</span>
+                            {% endif %}
+                        </td>
+                        <td data-label="Acciones">
+                            <div class="action-buttons">
+                                <button class="btn btn-warning btn-sm" onclick="window.location.href='/modificarProducto/{{ p.id }}'">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="window.location.href='/eliminarProducto/{{ p.id }}'">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="11" class="text-center">No hay productos disponibles.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script>
+        // Búsqueda en la tabla
+        function searchTable() {
+            const input = document.querySelector('.input-group input');
+            const filter = input.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? '' : 'none';
+            });
+        }
+    </script>
+</div>
+{% endblock %}

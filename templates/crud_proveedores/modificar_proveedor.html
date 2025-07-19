@@ -1,0 +1,212 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4 text-dark">Modificar Proveedor</h1>
+        
+        <div class="form-container shadow p-4 rounded bg-white" style="max-width: 900px; margin: auto;">
+            <form id="modificarProveedorForm" action="{% if proveedor.id %}{% url 'modificarProveedor' proveedor.id %}{% endif %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- Buscar Proveedor -->
+                <div class="form-group">
+                    <label for="search" class="font-weight-bold">Buscar Proveedor</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-light">
+                                <i class="fa fa-search text-secondary"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" id="search" placeholder="Buscar por Id o nombre" onkeyup="filterProviders()">
+                    </div>
+                </div>
+
+                <!-- Seleccionar Proveedor -->
+                <div class="form-group">
+                    <label for="proveedor" class="font-weight-bold">Seleccionar Proveedor</label>
+                    <select class="form-control rounded-pill" id="id" name="id">
+                        {% for p in proveedores %}
+                        <option value="{{ p.id }}" {% if p.id == proveedor.id %}selected{% endif %}>
+                            {{ p.id }} - {{ p.nombre }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Información Básica -->
+                <h4 class="text-secondary mt-4 mb-3">Información Básica</h4>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="rut" class="font-weight-bold">RUT</label>
+                        <input type="text" class="form-control rounded-pill" id="rut" name="rut" placeholder="Ingrese el RUT" value="{{ proveedor.rut }}" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="nombre" class="font-weight-bold">Nombre</label>
+                        <input type="text" class="form-control rounded-pill" id="nombre" name="nombre" placeholder="Ingrese el nombre del proveedor" value="{{ proveedor.nombre }}" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion" class="font-weight-bold">Dirección</label>
+                    <textarea class="form-control rounded" id="direccion" name="direccion" placeholder="Ingrese la dirección" rows="2" required>{{ proveedor.direccion }}</textarea>
+                </div>
+
+                <!-- Contacto -->
+                <h4 class="text-secondary mt-4 mb-3">Información de Contacto</h4>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="telefono" class="font-weight-bold">Teléfono</label>
+                        <input type="tel" class="form-control rounded-pill" id="telefono" name="telefono" placeholder="Ingrese el teléfono" value="{{ proveedor.telefono }}" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email" class="font-weight-bold">Email</label>
+                        <input type="email" class="form-control rounded-pill" id="email" name="email" placeholder="Ingrese el email" value="{{ proveedor.email }}" required>
+                    </div>
+                </div>
+
+                <!-- Relaciones -->
+                <h4 class="text-secondary mt-4 mb-3">Relaciones</h4>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="giro" class="font-weight-bold">Giro</label>
+                        <select class="form-control rounded-pill" id="giro" name="giro" required>
+                            {% for giro in giros %}
+                            <option value="{{ giro.id }}" {% if proveedor.giro and giro.id == proveedor.giro.id %}selected{% endif %}>
+                                {{ giro.codigo }} - {{ giro.nombre }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="region" class="font-weight-bold">Región</label>
+                        <select class="form-control rounded-pill" id="id_region" name="region" required>
+                            <option value="">Seleccione una región</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="provincia" class="font-weight-bold">Provincia</label>
+                        <select class="form-control rounded-pill" id="id_provincia" name="provincia" required>
+                            <option value="">Seleccione una provincia</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="comuna" class="font-weight-bold">Comuna</label>
+                        <select class="form-control rounded-pill" id="id_comuna" name="comuna" required>
+                            <option value="">Seleccione una comuna</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Logo -->
+                <h4 class="text-secondary mt-4 mb-3">Logo</h4>
+                <div class="form-group">
+                    <label for="logo" class="font-weight-bold">Logo (opcional)</label>
+                    <input type="file" class="form-control rounded-pill" id="logo" name="logo" accept="image/*">
+                    {% if proveedor.logo %}
+                    <img src="{{ proveedor.logo.url }}" alt="Logo actual" class="mt-2" style="max-height: 100px;">
+                    {% endif %}
+                </div>
+
+                <!-- Botones -->
+                <div class="form-group text-center mt-4">
+                    <a href="{% url 'listarProveedor' %}" class="btn btn-secondary btn-sm rounded-pill">
+                        <i class="fa fa-arrow-left"></i> Volver
+                    </a>
+                    <button type="button" class="btn btn-success btn-sm rounded-pill" onclick="confirmModification()">
+                        <i class="fa fa-check-circle"></i> Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Cargar regiones, provincias y comunas automáticamente
+        fetchRegions();
+        if ("{{ proveedor.region_id }}") {
+            fetchProvinces("{{ proveedor.region_id }}", "{{ proveedor.provincia_id }}");
+            fetchComunas("{{ proveedor.provincia_id }}", "{{ proveedor.comuna_id }}");
+        }
+    });
+
+    function fetchRegions() {
+        fetch('{% url "get_regiones" %}')
+            .then(response => response.json())
+            .then(data => {
+                const regionSelect = document.getElementById('id_region');
+                data.forEach(region => {
+                    const option = document.createElement('option');
+                    option.value = region.id;
+                    option.textContent = region.nombre;
+                    regionSelect.appendChild(option);
+                });
+                regionSelect.value = "{{ proveedor.region_id }}";
+            });
+    }
+
+    function fetchProvinces(regionId, selectedProvincia = null) {
+        fetch(`{% url "get_provincias_por_region" region_id=":region_id" %}`.replace(':region_id', regionId))
+            .then(response => response.json())
+            .then(data => {
+                const provinciaSelect = document.getElementById('id_provincia');
+                provinciaSelect.innerHTML = '<option value="">Seleccione una provincia</option>';
+                data.forEach(provincia => {
+                    const option = document.createElement('option');
+                    option.value = provincia.id;
+                    option.textContent = provincia.nombre;
+                    provinciaSelect.appendChild(option);
+                });
+                if (selectedProvincia) provinciaSelect.value = selectedProvincia;
+            });
+    }
+
+    function fetchComunas(provinciaId, selectedComuna = null) {
+        fetch(`{% url "get_comunas_por_provincia" provincia_id=":provincia_id" %}`.replace(':provincia_id', provinciaId))
+            .then(response => response.json())
+            .then(data => {
+                const comunaSelect = document.getElementById('id_comuna');
+                comunaSelect.innerHTML = '<option value="">Seleccione una comuna</option>';
+                data.forEach(comuna => {
+                    const option = document.createElement('option');
+                    option.value = comuna.id;
+                    option.textContent = comuna.nombre;
+                    comunaSelect.appendChild(option);
+                });
+                if (selectedComuna) comunaSelect.value = selectedComuna;
+            });
+    }
+
+    document.getElementById('id_region').addEventListener('change', function() {
+        fetchProvinces(this.value);
+    });
+
+    document.getElementById('id_provincia').addEventListener('change', function() {
+        fetchComunas(this.value);
+    });
+
+    function confirmModification() {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¿Quieres guardar los cambios realizados?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, guardar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('modificarProveedorForm').submit();
+            }
+        });
+    }
+</script>
+{% endblock %}

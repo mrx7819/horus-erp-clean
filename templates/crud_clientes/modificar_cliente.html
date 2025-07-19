@@ -1,0 +1,154 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Modificar Cliente - ID: {{ cliente.id }}</h1>
+
+        <div class="form-container shadow p-4 rounded" style="max-width: 900px; margin: auto; background-color: #ffffff;">
+            <form action="{% if cliente.id %}{% url 'modificarCliente' cliente.id %}{% endif %}" method="POST" style="font-size: 0.9rem;">
+                {% csrf_token %}
+
+                <!-- Selección de Cliente -->
+                <div class="form-group">
+                    <label for="id">Cliente</label>
+                    <select class="form-control rounded-pill" id="id" name="id">
+                        {% for c in clientes %}
+                            <option value="{{ c.id }}" {% if c.id == cliente.id %}selected{% endif %}>
+                                {{ c.id }} - {{ c.nombre }} {{ c.apellido }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="row">
+                    <!-- RUT Field -->
+                    <div class="form-group col-md-6">
+                        <label for="rut">RUT</label>
+                        <input type="text" class="form-control rounded-pill" id="rut" name="rut"
+                               value="{{ cliente.rut }}" placeholder="Ingrese el RUT" required>
+                    </div>
+
+                    <!-- Nombre Field -->
+                    <div class="form-group col-md-6">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control rounded-pill" id="nombre" name="nombre"
+                               value="{{ cliente.nombre }}" placeholder="Ingrese el nombre del cliente" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Apellido Field -->
+                    <div class="form-group col-md-6">
+                        <label for="apellido">Apellido</label>
+                        <input type="text" class="form-control rounded-pill" id="apellido" name="apellido"
+                               value="{{ cliente.apellido }}" placeholder="Ingrese el apellido del cliente" required>
+                    </div>
+
+                    <!-- Teléfono Field -->
+                    <div class="form-group col-md-6">
+                        <label for="telefono">Teléfono</label>
+                        <input type="text" class="form-control rounded-pill" id="telefono" name="telefono"
+                               value="{{ cliente.telefono }}" placeholder="Ingrese el teléfono" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Email Field -->
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control rounded-pill" id="email" name="email"
+                               value="{{ cliente.email }}" placeholder="Ingrese el email del cliente" required>
+                    </div>
+
+                    <!-- Fecha de Nacimiento Field -->
+                    <div class="form-group col-md-6">
+                        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control rounded-pill" id="fecha_nacimiento" name="fecha_nacimiento"
+                               value="{{ cliente.fecha_nacimiento }}" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Dirección Field -->
+                    <div class="form-group col-md-12">
+                        <label for="direccion">Dirección</label>
+                        <textarea class="form-control rounded" id="direccion" name="direccion"
+                                  placeholder="Ingrese la dirección" rows="2" style="resize: none;">{{ cliente.direccion }}</textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Género Field -->
+                    <div class="form-group col-md-6">
+                        <label for="genero">Género</label>
+                        <select class="form-control rounded-pill" id="genero" name="genero" required>
+                            <option value="M" {% if cliente.genero == "M" %}selected{% endif %}>Masculino</option>
+                            <option value="F" {% if cliente.genero == "F" %}selected{% endif %}>Femenino</option>
+                            <option value="O" {% if cliente.genero == "O" %}selected{% endif %}>Otro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Interacciones del Cliente -->
+                <hr>
+                <h4 class="mt-3">Interacciones del Cliente</h4>
+                <div class="row">
+                    <!-- Listado de Interacciones -->
+                    <div class="form-group col-md-12">
+                        {% for interaccion in interacciones %}
+                        <div class="card mb-2 shadow">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ interaccion.tipo_interaccion }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ interaccion.fecha }}</h6>
+                                <p class="card-text">{{ interaccion.descripcion }}</p>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="alert alert-warning" role="alert">
+                            No hay interacciones registradas para este cliente.
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Agregar Nueva Interacción -->
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="interaccion_tipo">Tipo de Interacción</label>
+                        <select class="form-control rounded-pill" id="interaccion_tipo" name="interaccion_tipo">
+                            <option value="Llamada">Llamada</option>
+                            <option value="Email">Email</option>
+                            <option value="Reunión">Reunión</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="interaccion_fecha">Fecha</label>
+                        <input type="date" class="form-control rounded-pill" id="interaccion_fecha" name="interaccion_fecha">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="interaccion_descripcion">Descripción</label>
+                        <textarea class="form-control rounded" id="interaccion_descripcion" name="interaccion_descripcion"
+                                  placeholder="Descripción de la interacción" rows="1" style="resize: none;"></textarea>
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="text-center mt-4">
+                    <a href="{% url 'listarCliente' %}" class="btn btn-primary btn-sm rounded-pill">
+                        <i class="fa fa-arrow-left"></i> Volver
+                    </a>
+                    <button type="submit" class="btn btn-success btn-sm rounded-pill">
+                        <i class="fa fa-check-circle"></i> Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

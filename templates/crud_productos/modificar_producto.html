@@ -1,0 +1,268 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% block content %}
+<!-- Reorganización del formulario -->
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <div class="alert text-center">
+            <h3><strong>Modificar Producto</strong></h3>
+            <p>Llena los campos a continuación para actualizar el producto seleccionado.</p>
+        </div>
+
+        <div class="card shadow-lg p-4 rounded" style="max-width: 800px; margin: auto; background-color: #ffffff;">
+            <form id="modify-product-form" action="{% if producto.id %}{% url 'modificarProducto' producto.id %}{% endif %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- Buscar Producto -->
+                <div class="form-group mb-3">
+                    <label for="search"><strong>Buscar Producto</strong></label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-light">
+                                <i class="fa fa-search text-secondary"></i>
+                            </span>
+                        </div>
+                        <input 
+                            type="text" 
+                            class="form-control rounded-pill" 
+                            id="search" 
+                            placeholder="Buscar por SKU o nombre" 
+                            onkeyup="filterProducts()">
+                    </div>
+                    <small class="form-text text-muted">Ingrese el SKU o nombre del producto para seleccionarlo.</small>
+                </div>
+
+                <!-- Selección de Producto -->
+                <div class="form-group mb-3">
+                    <label for="id"><strong>Seleccionar Producto</strong></label>
+                    <select class="form-control rounded-pill" id="id" name="id" required>
+                        {% for p in productos %}
+                            <option value="{{ p.id }}" {% if p.id == producto.id %} selected {% endif %}>
+                                {{ p.id }} - {{ p.nombre }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+
+                <!-- SKU y Nombre -->
+                <div class="row mb-3">
+                    <div class="form-group col-lg-6">
+                        <label for="sku"><strong>SKU</strong></label>
+                        <input 
+                            type="text" 
+                            class="form-control rounded-pill" 
+                            id="sku" 
+                            name="sku" 
+                            value="{{ producto.sku }}" 
+                            placeholder="Ingrese el SKU" 
+                            maxlength="50" 
+                            required>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="nombre"><strong>Nombre</strong></label>
+                        <input 
+                            type="text" 
+                            class="form-control rounded-pill" 
+                            id="nombre" 
+                            name="nombre" 
+                            value="{{ producto.nombre }}" 
+                            placeholder="Ingrese el nombre del producto" 
+                            required>
+                    </div>
+                </div>
+
+                <!-- Categoría y Proveedor -->
+                <div class="row mb-3">
+                    <div class="form-group col-lg-6">
+                        <label for="categoria"><strong>Categoría</strong></label>
+                        <select class="form-control rounded-pill" id="categoria" name="categoria" required>
+                            {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}" {% if producto.categoria and categoria.id == producto.categoria.id %}selected{% endif %}>
+                                    {{ categoria.nombre }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="proveedor"><strong>Proveedor</strong></label>
+                        <select class="form-control rounded-pill" id="proveedor" name="proveedor" required>
+                            {% for proveedor in proveedores %}
+                                <option value="{{ proveedor.id }}" {% if producto.proveedor and proveedor.id == producto.proveedor.id %}selected{% endif %}>
+                                    {{ proveedor.nombre }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Precios -->
+                <div class="row mb-3">
+                    <div class="form-group col-lg-4">
+                        <label for="precio_compra_sin_iva"><strong>Precio de Compra (sin IVA)</strong></label>
+                        <input 
+                            type="number" 
+                            class="form-control rounded-pill" 
+                            id="precio_compra_sin_iva" 
+                            name="precio_compra_sin_iva" 
+                            value="{{ precio_compra_sin_iva }}" 
+                            placeholder="Ingrese el precio sin IVA" 
+                            step="0.01" 
+                            required>
+                    </div>
+                
+                    <div class="form-group col-lg-4">
+                        <label for="precio_compra"><strong>Precio de Compra (con IVA)</strong></label>
+                        <input 
+                            type="number" 
+                            class="form-control rounded-pill bg-light" 
+                            id="precio_compra" 
+                            name="precio_compra" 
+                            value="{{ producto.precio_compra }}" 
+                            placeholder="Calculado automáticamente" 
+                            readonly>
+                    </div>
+                
+                    <div class="form-group col-lg-4">
+                        <label for="precio_venta"><strong>Precio de Venta</strong></label>
+                        <input 
+                            type="number" 
+                            class="form-control rounded-pill" 
+                            id="precio_venta" 
+                            name="precio_venta" 
+                            value="{{ producto.precio_venta }}" 
+                            placeholder="Ingrese el precio de venta" 
+                            step="0.01" 
+                            required>
+                    </div>
+                </div>
+                
+
+                <!-- IVA y % Ganancia -->
+                <div class="row mb-3">
+                    <div class="form-group col-lg-6">
+                        <label for="iva"><strong>IVA (%)</strong></label>
+                        <input 
+                            type="number" 
+                            class="form-control rounded-pill" 
+                            id="iva" 
+                            name="iva" 
+                            value="19.00" 
+                            step="0.01" 
+                            readonly>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="porc_ganancias"><strong>% Ganancia</strong></label>
+                        <input 
+                            type="text" 
+                            class="form-control rounded-pill bg-light" 
+                            id="porc_ganancias" 
+                            name="porc_ganancias" 
+                            value="{{ producto.porc_ganancias }}" 
+                            placeholder="Calculado automáticamente" 
+                            readonly>
+                    </div>
+                </div>
+
+                <!-- Cantidad y Bodega -->
+                <div class="row mb-3">
+                    <div class="form-group col-lg-6">
+                        <label for="cantidad"><strong>Cantidad</strong></label>
+                        <input 
+                            type="number" 
+                            class="form-control rounded-pill" 
+                            id="cantidad" 
+                            name="cantidad" 
+                            value="{{ producto.cantidad }}" 
+                            placeholder="Ingrese la cantidad disponible" 
+                            required>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label for="bodega"><strong>Bodega</strong></label>
+                        {% if bodegas %}
+                            <select class="form-control rounded-pill" id="bodega" name="bodega" required>
+                                {% for bodega in bodegas %}
+                                    <option value="{{ bodega.id }}" {% if producto.bodega and bodega.id == producto.bodega.id %}selected{% endif %}>
+                                        {{ bodega.nombre }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <p class="text-danger">No hay bodegas disponibles.</p>
+                            <a href="{% url 'agregarBodega' %}" class="btn btn-sm btn-outline-primary">Agregar Bodega</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Imagen -->
+                <div class="row mb-3">
+                    <div class="form-group col-md-12">
+                        <label for="imagen"><strong>Imagen del Producto</strong></label>
+                        <input 
+                            type="file" 
+                            class="form-control rounded-pill" 
+                            id="imagen" 
+                            name="imagen" 
+                            accept="image/*">
+                        {% if producto.img %}
+                            <small class="form-text text-muted">Imagen actual:</small>
+                            <img src="{{ producto.img.url }}" alt="Imagen del producto" style="width: 100px; height: auto;">
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="text-center mt-4">
+                    <a href="{% url 'listarProducto' %}" class="btn btn-secondary btn-sm rounded-pill">
+                        <i class="fa fa-arrow-left"></i> Volver
+                    </a>
+                    <button type="submit" class="btn btn-success btn-sm rounded-pill">
+                        <i class="fa fa-check-circle"></i> Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const precioCompraSinIVAInput = document.getElementById('precio_compra_sin_iva');
+        const precioCompraConIVAInput = document.getElementById('precio_compra');
+        const precioVentaInput = document.getElementById('precio_venta');
+        const porcGananciasInput = document.getElementById('porc_ganancias');
+        const ivaInput = document.getElementById('iva');
+
+        function calcularPrecios() {
+            const precioCompraSinIVA = parseFloat(precioCompraSinIVAInput.value);
+            const iva = parseFloat(ivaInput.value) / 100;
+
+            if (!isNaN(precioCompraSinIVA)) {
+                const precioCompraConIVA = precioCompraSinIVA * (1 + iva);
+                precioCompraConIVAInput.value = precioCompraConIVA.toFixed(2);
+
+                const precioVenta = parseFloat(precioVentaInput.value);
+                if (!isNaN(precioVenta)) {
+                    const margen = ((precioVenta - precioCompraConIVA) / precioCompraConIVA) * 100;
+                    porcGananciasInput.value = margen.toFixed(2) + '%';
+                } else {
+                    porcGananciasInput.value = '';
+                }
+            } else {
+                precioCompraConIVAInput.value = '';
+                porcGananciasInput.value = '';
+            }
+        }
+
+        precioCompraSinIVAInput.addEventListener('input', calcularPrecios);
+        precioVentaInput.addEventListener('input', calcularPrecios);
+    });
+</script>
+{% endblock %}

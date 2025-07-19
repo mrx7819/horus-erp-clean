@@ -1,0 +1,107 @@
+    {% extends '../index_master.html' %}
+    {% load static %}
+
+    {% block content %}
+
+    <div class="right_col" role="main">
+        <div class="container mt-5">
+            <h1 class="text-center mb-4">Proveedores</h1>
+            <a href="{% url 'agregarProveedor' %}" class="btn btn-success mb-3">
+                <i class="fa fa-user-plus"></i> Agregar Proveedor
+            </a>
+            
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-sm" style="font-size: 0.75rem;"> <!-- Tamaño de fuente reducido -->
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" style="width: 7%;">RUT</th> <!-- Ajustar ancho -->
+                            <th scope="col" style="width: 12%;">Nombre</th> <!-- Ajustar ancho -->
+                            <th scope="col" style="width: 18%;">Dirección</th> <!-- Ajustar ancho -->
+                            <th scope="col" style="width: 12%;">Email</th> <!-- Ajustar ancho -->
+                            <th scope="col" style="width: 8%;">Teléfono</th> <!-- Ajustar ancho -->
+                            <th scope="col" style="width: 15%;">Giro</th> <!-- Ajustar ancho -->
+                            <th scope="col" style="width: 5%;">Acción</th> <!-- Ajustar ancho -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for proveedor in proveedores %}
+                        <tr onclick="toggleText(this)">
+                            <td class="truncate">{{ proveedor.rut }}</td>
+                            <td class="truncate">{{ proveedor.nombre }}</td>
+                            <td class="truncate" title="{{ proveedor.direccion }}">{{ proveedor.direccion }}, Region {{ proveedor.region }}</td>
+                            <td class="truncate">{{ proveedor.email }}</td>
+                            <td class="truncate">{{ proveedor.telefono }}</td>
+                            <td>{{ proveedor.giro.codigo }} - {{ proveedor.giro.nombre|truncatechars:7 }}{% if proveedor.giro.nombre|length > 7 %}...{% endif %}</td>
+                            <td>
+                                <div style="white-space: nowrap;"> <!-- Evitar que los botones se doblen -->
+                                    <button class="btn btn-warning btn-sm custom-btn" onclick="window.location.href='/modificarProveedor/{{ proveedor.id }}'">
+                                        <i class="fa fa-refresh"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm custom-btn" onclick="window.location.href='/eliminarProveedor/{{ proveedor.id }}'">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-turquesa btn-sm custom-btn" onclick="window.location.href='/agregarPedido/{{ proveedor.id }}'">
+                                        <i class="fa fa-dolly"></i> Hacer pedido
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="full-text" style="display: none;">
+                            <td colspan="8">
+                                <strong>Nombre completo:</strong> {{ proveedor.nombre }}<br>
+                                <strong>Dirección completa:</strong> {{ proveedor.direccion }}, Región {{ proveedor.region }}<br>
+                                <strong>Giro completo:</strong> {{ proveedor.giro }} <!-- Asegúrate de tener un campo de descripción si es necesario -->
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center">No hay proveedores disponibles.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- Estructura para dispositivos móviles -->
+                <div class="d-md-none">
+                    {% for p in proveedor %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Proveedor</h5>
+                            <p class="card-text"><strong>RUT:</strong> {{ p.rut }}</p>
+                            <p class="card-text"><strong>Nombre:</strong> {{ p.nombre }}</p>
+                            <p class="card-text"><strong>Dirección:</strong> {{ p.direccion }}</p>
+                            <p class="card-text"><strong>Email:</strong> {{ p.email }}</p>
+                            <p class="card-text"><strong>Teléfono:</strong> {{ p.telefono }}</p>
+                            <p class="card-text"><strong>Fecha de Creación:</strong> {{ p.fecha_creacion|date:"d/m/Y" }}</p>
+                            <p class="card-text"><strong>Giro:</strong> {{ p.giro.codigo }} - {{ p.giro.nombre|truncatechars:7 }}{% if p.giro.nombre|length > 7 %}...{% endif %}</p>
+                            <div>
+                                <button class="btn btn-warning btn-sm custom-btn" onclick="window.location.href='/modificarProveedor/{{ proveedor.id }}'">
+                                    <i class="fa fa-refresh"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm custom-btn" onclick="window.location.href='/eliminarProveedor/{{ proveedor.id }}'">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                <button class="btn btn-turquesa btn-sm custom-btn" onclick="window.location.href='/agregarPedido/{{ proveedor.id }}'">
+                                    <i class="fa fa-dolly"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="alert alert-warning" role="alert">No hay proveedores disponibles.</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleText(row) {
+            const nextRow = row.nextElementSibling;
+            if (nextRow && nextRow.classList.contains('full-text')) {
+                nextRow.style.display = nextRow.style.display === 'none' ? 'table-row' : 'none';
+            }
+        }
+    </script>
+
+    {% endblock %}

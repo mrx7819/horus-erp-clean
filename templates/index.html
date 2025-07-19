@@ -1,0 +1,535 @@
+{% extends 'index_master.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .producto-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: linear-gradient(135deg, #222222, #757575);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
+    color: #fcfcfc;
+    font-weight: 400;
+}
+
+.producto-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.producto-item span {
+    font-size: 10px;
+}
+
+.producto-item .nombre {
+    font-weight: bold;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.producto-item .ventas {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+</style>
+<div class="right_col" role="main">
+    <!-- Contenedor de las 4 principales cards -->
+    <div class="row row-principal">
+        <!-- Card 1 -->
+        <div id="welcome-section" class="welcome-section text-center mb-5 p-4 position-relative" style="background-color: #f5f5f5; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <button id="close-welcome" class="btn btn-sm btn-danger" style="position: absolute; top: 10px; right: 10px; padding: 4px 8px; font-size: 14px; border-radius: 50%;">&times;</button>
+            <h1 style="font-size: 28px; color: #353535;">Bienvenido a tu ERP</h1>
+            <p style="font-size: 16px; color: #555; margin-top: 10px;">
+                Aquí puedes gestionar y analizar tus datos de negocio. Consulta métricas clave como ventas, ingresos, 
+                productos más vendidos y clientes destacados. ¡Todo lo que necesitas para tomar decisiones informadas está aquí!
+            </p>
+            <p style="font-size: 16px; color: #555; margin-top: 15px;">
+                Te recomendamos leer el manual para aprovechar al máximo todas las funcionalidades del ERP.
+            </p>
+            <div class="text-center mt-4">
+                <a href="{% url 'ver_manual' %}" class="btn btn-primary btn-lg" style="background-color: #007bff; border-color: #0056b3; color: #fff;">
+                    <i class="fa fa-book"></i> Ver Manual
+                </a>
+            </div>
+        </div>
+        
+        <div class="col card-wrapper">
+            <div class="card card-chart custom-card">
+                <div class="card-header custom-card-header">
+                    <h5 class="card-category">Ganancias totales</h5>
+                    <h2 class="card-title" id="gananciasTotales">Cargando...</h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <div class="custom-dropdown">
+                        <div class="dropdown-selected">
+                            <img src="{% static 'images/chile(1).png' %}" alt="Chile" width="20">
+                            <span>CLP (Pesos)</span>
+                        </div>
+                        <ul class="dropdown-options">
+                            <li data-value="CLP">
+                                <img src="{% static 'images/chile(1).png' %}" alt="Chile" width="20">
+                                CLP (Pesos)
+                            </li>
+                            <li data-value="USD">
+                                <img src="{% static 'images/estados-unidos.png' %}" alt="USA" width="20">
+                                USD (Dólar)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="col card-wrapper">
+            <div class="card card-chart custom-card">
+                <div class="card-header custom-card-header">
+                    <h5 class="card-category">Últimas ventas</h5>
+                    <h2 class="card-title">Productos vendidos</h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <div id="productosVendidos" style="display: flex; flex-direction: column; gap: 15px;">
+                        <!-- Productos dinámicos se insertarán aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        <!-- Card 3 -->
+        <div class="col card-wrapper">
+            <div class="card card-chart custom-card">
+                <div class="card-header custom-card-header">
+                    <h5 class="card-category">Ingresos Diarios</h5>
+                    <h2 class="card-title">Ingresos del día: <span id="ingresos_hoy">$0.00</span></h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <span id="cambio_porcentaje" class="percentage-badge">+0%</span>
+                    <p style="color: #353535; font-weight: bold; font-size: 12px;">Respecto a ayer</p>
+                </div>
+            </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="col card-wrapper">
+            <div class="card card-chart custom-card">
+                <div class="card-header custom-card-header">
+                    <h5 class="card-category">Producto estrella</h5>
+                    <h2 class="card-title" id="productoEstrellaNombre"></h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <img id="productoEstrellaImg" src="" alt="Producto estrella" class="producto-estrella-img">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor del large card -->
+    <div class="row row-large">
+        <div class="col-12">
+            <div class="card card-chart custom-card large-card">
+                <div class="card-header custom-card-header">
+                    <h2 class="card-title">Ventas Totales por Producto</h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <div class="chart-wrapper">
+                        <canvas id="ventasPorProductoChart"></canvas>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor de las 3 cards inferiores -->
+    <div class="row row-secundarias">
+        <!-- Card 1: Categoría más vendida -->
+        <div class="col card-wrapper">
+            <div class="card card-chart custom-card">
+                <div class="card-header custom-card-header">
+                    <h5 class="card-category">Categoría más vendida</h5>
+                    <h2 class="card-title" id="categoriaMasVendida">Cargando...</h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <p id="categoriaMasVendidaDetalle">Detalle no disponible</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card 2: Cliente con más compras -->
+        <div class="col card-wrapper">
+            <div class="card card-chart custom-card">
+                <div class="card-header custom-card-header">
+                    <h5 class="card-category">Cliente con más compras</h5>
+                    <h2 class="card-title" id="clienteMasCompras">Cargando...</h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <p id="clienteMasComprasDetalle">Detalle no disponible</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card 3: Egresos o compras -->
+        <div class="col card-wrapper">
+            <div class="card card-chart custom-card">
+                <div class="card-header custom-card-header">
+                    <h5 class="card-category">Egresos o Compras</h5>
+                    <h2 class="card-title" id="egresosCompras">Cargando...</h2>
+                </div>
+                <div class="card-body custom-card-body">
+                    <p id="egresosComprasDetalle">Detalle no disponible</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    async function fetchData() {
+    try {
+        const response = await fetch('/api/ventas-por-producto/');
+        if (!response.ok) {
+            throw new Error('Error al cargar los datos');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function renderChart() {
+    const chartData = await fetchData();
+    if (!chartData) return;
+
+    const ctx = document.getElementById('ventasPorProductoChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: 'Total de Ventas',
+                data: chartData.data,
+                backgroundColor: 'rgba(53, 53, 53, 0.6)', // Gris semitransparente
+                borderColor: 'rgba(53, 53, 53, 1)', // Gris sólido  
+                borderWidth: 1,
+                borderRadius: 5 // Bordes redondeados para las barras
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // Esto asegura que el gráfico ocupe el contenedor completo
+            plugins: {
+                legend: { display: true }, // Muestra la leyenda
+                tooltip: { enabled: true } // Activa los tooltips
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Productos' }, // Título del eje X
+                    grid: { display: false }, // Oculta las líneas de la cuadrícula en X
+                    ticks: { maxRotation: 0, minRotation: 0 }, // Evita la rotación de etiquetas
+                    barPercentage: 0.5, // Reduce el ancho de las barras
+                    categoryPercentage: 0.5, // Aumenta el espacio entre las barras
+                    maxBarThickness: 50 // Grosor máximo para las barras
+                },
+                y: {
+                    beginAtZero: true,
+                    title: { display: true, text: 'Monto en Ventas' }, // Título del eje Y
+                    grid: {
+                        color: 'rgba(200, 200, 200, 0.2)' // Líneas de cuadrícula más sutiles
+                    }
+                }
+            },
+            layout: {
+                padding: {
+                    top: 20,
+                    bottom: 10,
+                    left: 10,
+                    right: 10
+                }
+            }
+        }
+    });
+}
+
+renderChart();
+
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const gananciasElement = document.getElementById("gananciasTotales");
+    const dropdown = document.querySelector(".custom-dropdown");
+    const selected = dropdown.querySelector(".dropdown-selected");
+    const options = dropdown.querySelector(".dropdown-options");
+
+    let gananciasData = { ganancias_totales_usd: 0, ganancias_totales_clp: 0 };
+
+    // Función para obtener las ganancias desde la API
+    async function cargarGanancias() {
+        try {
+            const response = await fetch('/api/ganancias-totales/'); // Ajusta la URL según tu configuración
+            gananciasData = await response.json();
+            actualizarGanancias("CLP"); // Inicializar con CLP
+        } catch (error) {
+            console.error("Error al cargar las ganancias:", error);
+        }
+    }
+
+    // Función para actualizar el valor de las ganancias en el DOM
+    function actualizarGanancias(moneda) {
+        if (moneda === "USD") {
+            gananciasElement.textContent = `$${gananciasData.ganancias_totales_usd.toFixed(2)} USD`;
+        } else if (moneda === "CLP") {
+            gananciasElement.textContent = `${gananciasData.ganancias_totales_clp.toLocaleString()} CLP`;
+        }
+    }
+
+    // Mostrar/ocultar opciones al hacer clic en el dropdown
+    dropdown.addEventListener("click", () => {
+        dropdown.classList.toggle("active");
+    });
+
+    // Manejar la selección de moneda
+    options.addEventListener("click", (e) => {
+        if (e.target.tagName === "LI" || e.target.closest("li")) {
+            const option = e.target.closest("li");
+            const value = option.getAttribute("data-value");
+            const img = option.querySelector("img").src;
+            const text = option.textContent.trim();
+
+            // Actualizar la moneda seleccionada en el dropdown
+            selected.innerHTML = `<img src="${img}" alt="${text}" width="20"> <span>${text}</span>`;
+            dropdown.classList.remove("active");
+
+            // Actualizar las ganancias según la moneda seleccionada
+            actualizarGanancias(value);
+        }
+    });
+
+    // Cerrar el dropdown si se hace clic fuera de él
+    document.addEventListener("click", (e) => {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove("active");
+        }
+    });
+
+    // Cargar las ganancias al inicio
+    cargarGanancias();
+});
+
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const contenedorProductos = document.getElementById("productosVendidos");
+
+    async function cargarProductosVendidos() {
+        try {
+            const response = await fetch('/api/productos-vendidos/'); // Ajusta la URL según tu API
+            const data = await response.json();
+
+            // Limitar a 5 productos
+            const productosLimitados = data.slice(0, 3);
+
+            // Limpiar el contenedor antes de llenar los datos
+            contenedorProductos.innerHTML = "";
+
+            // Agregar cada producto dinámicamente
+            productosLimitados.forEach((producto, index) => {
+                const item = document.createElement("div");
+                item.className = "producto-item";
+                item.innerHTML = `
+                    <span class="nombre">${producto.nombre}</span>
+                    <span class="ventas">${producto.ventas} Ventas</span>
+                `;
+
+                // Animación de entrada
+                item.style.opacity = "0";
+                item.style.transform = "translateY(20px)";
+                setTimeout(() => {
+                    item.style.opacity = "1";
+                    item.style.transform = "translateY(0)";
+                    item.style.transition = "all 0.3s ease";
+                }, index * 100);
+
+                contenedorProductos.appendChild(item);
+            });
+        } catch (error) {
+            console.error("Error al cargar los productos vendidos:", error);
+        }
+    }
+
+    // Llamar a la función para cargar los datos
+    cargarProductosVendidos();
+});
+
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const productoNombreElement = document.getElementById("productoEstrellaNombre");
+    const productoImgElement = document.getElementById("productoEstrellaImg");
+
+    async function cargarProductoEstrella() {
+        try {
+            const response = await fetch('/api/producto-estrella/'); // Ajusta la URL según tu API
+            const data = await response.json();
+
+            if (data.error || !data.imagen_url) {
+                productoNombreElement.textContent = "Sin datos";
+                productoImgElement.src = "/static/images/default-placeholder.png"; // Imagen predeterminada
+                productoImgElement.alt = "No disponible";
+            } else {
+                // Limitar el nombre a 15 caracteres
+                const nombreCompleto = data.nombre;
+                const nombreCorto = nombreCompleto.length > 15
+                    ? nombreCompleto.slice(0, 15) + "..." // Colapsar y añadir "..."
+                    : nombreCompleto;
+
+                productoNombreElement.textContent = nombreCorto;
+                productoNombreElement.title = nombreCompleto; // Mostrar el nombre completo como tooltip
+                productoImgElement.src = data.imagen_url; // Usar la URL de la API
+                productoImgElement.alt = nombreCompleto;
+            }
+        } catch (error) {
+            console.error("Error al cargar el producto estrella:", error);
+        }
+    }
+
+    cargarProductoEstrella();
+});
+
+
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    fetch('/api/ingresos-diarios/')
+        .then(response => response.json())
+        .then(data => {
+            // Actualiza los ingresos diarios
+            document.getElementById('ingresos_hoy').innerText = `$${data.ingresos_hoy}`;
+            
+            const cambioElem = document.getElementById('cambio_porcentaje');
+            const cambio = data.cambio_porcentaje;
+
+            // Limpia clases anteriores
+            cambioElem.classList.remove('positive', 'negative');
+
+            // Aplica la clase y el texto según el valor
+            if (cambio >= 0) {
+                cambioElem.innerHTML = `<i class="fa fa-plus-circle"></i> +${cambio}%`;
+                cambioElem.classList.add('positive');
+            } else {
+                cambioElem.innerHTML = `<i class="fa fa-minus-circle"></i> ${cambio}%`;
+                cambioElem.classList.add('negative');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+});
+
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Elementos HTML
+        const categoriaMasVendidaElement = document.getElementById("categoriaMasVendida");
+        const categoriaMasVendidaDetalleElement = document.getElementById("categoriaMasVendidaDetalle");
+        const clienteMasComprasElement = document.getElementById("clienteMasCompras");
+        const clienteMasComprasDetalleElement = document.getElementById("clienteMasComprasDetalle");
+        const egresosComprasElement = document.getElementById("egresosCompras");
+        const egresosComprasDetalleElement = document.getElementById("egresosComprasDetalle");
+
+        // Cargar Categoría Más Vendida
+        async function cargarCategoriaMasVendida() {
+            try {
+                const response = await fetch('/api/categoria-mas-vendida/');
+                const data = await response.json();
+
+                if (data.error || !data.categoria) {
+                    categoriaMasVendidaElement.textContent = "Sin datos";
+                    categoriaMasVendidaDetalleElement.textContent = "No se encontraron ventas recientes.";
+                } else {
+                    categoriaMasVendidaElement.textContent = data.categoria;
+                    categoriaMasVendidaDetalleElement.textContent = `Total ventas: ${data.total_vendido}`;
+                }
+            } catch (error) {
+                console.error("Error al cargar la categoría más vendida:", error);
+                categoriaMasVendidaElement.textContent = "Error";
+                categoriaMasVendidaDetalleElement.textContent = "No se pudo cargar la información.";
+            }
+        }
+
+        // Cargar Cliente con Más Compras
+        async function cargarClienteMasCompras() {
+            try {
+                const response = await fetch('/api/cliente-mas-compras/');
+                const data = await response.json();
+
+                if (data.error || !data.nombre) {
+                    clienteMasComprasElement.textContent = "Sin datos";
+                    clienteMasComprasDetalleElement.textContent = "No se encontraron clientes recientes.";
+                } else {
+                    clienteMasComprasElement.textContent = data.nombre;
+                    clienteMasComprasDetalleElement.textContent = `Total compras: $${data.total_compras.toLocaleString()}`;
+                }
+            } catch (error) {
+                console.error("Error al cargar el cliente con más compras:", error);
+                clienteMasComprasElement.textContent = "Error";
+                clienteMasComprasDetalleElement.textContent = "No se pudo cargar la información.";
+            }
+        }
+
+        // Cargar Egresos o Compras
+        async function cargarEgresosCompras() {
+            try {
+                const response = await fetch('/api/egresos/');
+                const data = await response.json();
+
+                if (data.error || !data.egresos_totales) {
+                    egresosComprasElement.textContent = "Sin datos";
+                    egresosComprasDetalleElement.textContent = "No se encontraron egresos.";
+                } else {
+                    egresosComprasElement.textContent = `$${data.egresos_totales.toLocaleString()}`;
+                    egresosComprasDetalleElement.textContent = "Corresponde al total en productos / pedidos / compras";
+                }
+            } catch (error) {
+                console.error("Error al cargar los egresos:", error);
+                egresosComprasElement.textContent = "Error";
+                egresosComprasDetalleElement.textContent = "No se pudo cargar la información.";
+            }
+        }
+
+        // Llamar a las funciones para cargar los datos
+        cargarCategoriaMasVendida();
+        cargarClienteMasCompras();
+        cargarEgresosCompras();
+    });
+</script>
+<script>
+    // Al cargar la página, verifica si el usuario ya ocultó la sección anteriormente
+    document.addEventListener("DOMContentLoaded", function() {
+        const welcomeSection = document.getElementById("welcome-section");
+        const isHidden = localStorage.getItem("welcomeHidden");
+
+        if (isHidden === "true") {
+            welcomeSection.style.display = "none";
+        }
+
+        // Añadir el evento al botón de cerrar
+        const closeButton = document.getElementById("close-welcome");
+        closeButton.addEventListener("click", function() {
+            welcomeSection.style.display = "none"; // Ocultar la sección
+            localStorage.setItem("welcomeHidden", "true"); // Guardar preferencia en el navegador
+        });
+    });
+</script>
+{% endblock %}

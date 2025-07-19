@@ -1,0 +1,219 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4" style="font-size: 1.5rem;">Agregar Proveedor</h1>
+
+        <!-- Formulario estilizado dentro de una tarjeta -->
+        <div class="form-container shadow p-4 rounded" style="max-width: 900px; margin: auto; background-color: #ffffff;">
+            <form class="agregarProveedor-form" action="{% url 'agregarProveedor' %}" method="post" enctype="multipart/form-data" style="font-size: 0.9rem;">
+                {% csrf_token %}
+
+                <!-- Información del Proveedor -->
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="rut">RUT <span class="text-muted">(Ej: 12345678K)</span></label>
+                        <input 
+                            type="text" 
+                            class="form-control rounded-pill" 
+                            id="rut" 
+                            name="rut" 
+                            value="{{ form.rut.value|default:'' }}" 
+                            placeholder="Ingrese el RUT" 
+                            maxlength="12" 
+                            required>
+                        {% if form.rut.errors %}
+                        <small class="text-danger">{{ form.rut.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="nombre">Nombre</label>
+                        <input 
+                            type="text" 
+                            class="form-control rounded-pill" 
+                            id="nombre" 
+                            name="nombre" 
+                            value="{{ form.nombre.value|default:'' }}" 
+                            placeholder="Ingrese el nombre" 
+                            required>
+                        {% if form.nombre.errors %}
+                        <small class="text-danger">{{ form.nombre.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="telefono">Teléfono <span class="text-muted">(Ej: +56912345678)</span></label>
+                        <input 
+                            type="tel" 
+                            class="form-control rounded-pill" 
+                            id="telefono" 
+                            name="telefono" 
+                            value="{{ form.telefono.value|default:'' }}" 
+                            placeholder="Ingrese el teléfono" 
+                            required>
+                        {% if form.telefono.errors %}
+                        <small class="text-danger">{{ form.telefono.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="email">Email</label>
+                        <input 
+                            type="email" 
+                            class="form-control rounded-pill" 
+                            id="email" 
+                            name="email" 
+                            value="{{ form.email.value|default:'' }}" 
+                            placeholder="Ingrese el email" 
+                            required>
+                        {% if form.email.errors %}
+                        <small class="text-danger">{{ form.email.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="region">Región</label>
+                        <select class="form-control rounded-pill" id="id_region" name="region" required>
+                            <option value="">Seleccione una región</option>
+                        </select>
+                        {% if form.region.errors %}
+                        <small class="text-danger">{{ form.region.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="provincia">Provincia</label>
+                        <select class="form-control rounded-pill" id="id_provincia" name="provincia" required>
+                            <option value="">Seleccione una provincia</option>
+                        </select>
+                        {% if form.provincia.errors %}
+                        <small class="text-danger">{{ form.provincia.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="comuna">Comuna</label>
+                        <select class="form-control rounded-pill" id="id_comuna" name="comuna" required>
+                            <option value="">Seleccione una comuna</option>
+                        </select>
+                        {% if form.comuna.errors %}
+                        <small class="text-danger">{{ form.comuna.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="direccion">Dirección</label>
+                        <textarea 
+                            class="form-control rounded" 
+                            id="direccion" 
+                            name="direccion" 
+                            placeholder="Ingrese la dirección" 
+                            rows="2" 
+                            style="resize: none;">{{ form.direccion.value|default:'' }}</textarea>
+                        {% if form.direccion.errors %}
+                        <small class="text-danger">{{ form.direccion.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="giro">Giro</label>
+                        <select class="form-control rounded-pill" id="giro" name="giro" required>
+                            <option value="">Seleccione un giro</option>
+                            {% for giro in giros %}
+                            <option value="{{ giro.id }}" {% if giro.id == proveedor.giro.id %}selected{% endif %}>
+                                {{ giro.codigo }} - {{ giro.nombre }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        {% if form.giro.errors %}
+                        <small class="text-danger">{{ form.giro.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="logo">Logo (opcional)</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="logo-input" name="logo" accept="image/*">
+                            <label class="custom-file-label" for="logo-input">Seleccionar archivo</label>
+                        </div>
+                        <div id="logo-preview" class="mt-2"></div>
+                        {% if form.logo.errors %}
+                            <small class="text-danger">{{ form.logo.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+                
+
+                <!-- Botones de Acción -->
+                <div class="text-center mt-4">
+                    <a href="{% url 'listarProveedor' %}" class="btn btn-secondary btn-sm rounded-pill">
+                        <i class="fa fa-arrow-left"></i> Volver
+                    </a>
+                    <button type="submit" class="btn btn-success btn-sm rounded-pill">
+                        <i class="fa fa-user-plus"></i> Agregar Proveedor
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const comunaSelect = document.getElementById('id_comuna');
+        const regionSelect = document.getElementById('id_region');
+        const provinciaSelect = document.getElementById('id_provincia');
+
+        fetch('{% url "get_regiones" %}')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(region => {
+                    const option = document.createElement('option');
+                    option.value = region.id;
+                    option.textContent = region.nombre;
+                    regionSelect.add(option);
+                });
+            });
+
+        regionSelect.addEventListener('change', function () {
+            const regionId = this.value;
+            fetch(`{% url "get_provincias_por_region" region_id=":region_id" %}`.replace(':region_id', regionId))
+                .then(response => response.json())
+                .then(data => {
+                    provinciaSelect.innerHTML = '<option value="">Selecciona una provincia</option>';
+                    comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
+                    data.forEach(provincia => {
+                        const option = document.createElement('option');
+                        option.value = provincia.id;
+                        option.textContent = provincia.nombre;
+                        provinciaSelect.add(option);
+                    });
+                });
+        });
+
+        provinciaSelect.addEventListener('change', function () {
+            const provinciaId = this.value;
+            fetch(`{% url "get_comunas_por_provincia" provincia_id=":provincia_id" %}`.replace(':provincia_id', provinciaId))
+                .then(response => response.json())
+                .then(data => {
+                    comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
+                    data.forEach(comuna => {
+                        const option = document.createElement('option');
+                        option.value = comuna.id;
+                        option.textContent = comuna.nombre;
+                        comunaSelect.add(option);
+                    });
+                });
+        });
+    });
+
+    document.getElementById('logo-input').addEventListener('change', function (event) {
+        const fileName = event.target.files[0]?.name || "Seleccionar archivo";
+        event.target.nextElementSibling.textContent = fileName;
+    });
+</script>
+{% endblock %}

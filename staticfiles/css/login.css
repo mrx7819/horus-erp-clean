@@ -1,0 +1,113 @@
+/* Fuente principal */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif; /* Fuente Poppins */
+    background-color: #2c2c2c; /* Fondo oscuro */
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    height: 80vh;
+    background-color: #353535;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Asegura que el contenido no se desborde */
+}
+
+/* Sección izquierda con fondo borroso */
+.left-section {
+    flex: 1;
+    background-image: url('/static/images/login_img.jpg'); /* Ruta de la imagen de fondo */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Sección derecha con contenido */
+.right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    color: white;
+}
+
+/* Título principal */
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600; /* Semi-bold */
+}
+
+/* Estilo del formulario */
+form {
+    display: flex;
+    flex-direction: column; /* Alinear los campos verticalmente */
+}
+
+form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background-color: #4c4c4c; /* Fondo oscuro */
+    border: 1px solid #444; /* Bordes */
+    border-radius: 8px; /* Bordes redondeados */
+    color: white;
+    font-size: 14px;
+}
+
+form input::placeholder {
+    color: #bbb; /* Color del texto placeholder */
+}
+
+/* Botón principal */
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: #2b2b2b; /* Azul para el botón */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #202020; /* Azul más oscuro al pasar el cursor */
+}
+
+/* Enlaces */
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Enlaces en el footer del formulario */
+.forgot-password, .create-account {
+    text-align: center;
+    margin-top: 15px; /* Separación entre el formulario y los enlaces */
+    font-size: 14px;
+}
+
+.forgot-password a, .create-account a {
+    color: #757575; /* Azul claro */
+}
+
+.forgot-password a:hover, .create-account a:hover {
+    opacity: 0.9;
+}

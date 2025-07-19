@@ -1,0 +1,76 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <div class="alert text-center">
+            <h3><strong>¡Atención!</strong> Estás a punto de eliminar un cliente</h3>
+            <p>Esta acción no se puede deshacer. Por favor, asegúrate de que deseas continuar.</p>
+        </div>
+
+        <!-- Formulario en una tarjeta centrada -->
+        <div class="card shadow p-4 rounded" style="max-width: 600px; margin: auto; background-color: #ffffff;">
+            <div class="card-header text-center text-danger">
+                <h4>Eliminar Cliente</h4>
+            </div>
+            <div class="card-body">
+                <form id="delete-form" action="{% if cliente.id %}{% url 'eliminarCliente' cliente.id %}{% endif %}" method="POST">
+                    {% csrf_token %}
+
+                    <!-- Selección de Cliente -->
+                    <div class="form-group">
+                        <label for="id"><strong>Selecciona un Cliente</strong></label>
+                        <select id="id" name="id" class="form-control rounded-pill">
+                            {% for c in clientes %}
+                                <option value="{{ c.id }}" {% if c.id == cliente.id %} selected {% endif %}>
+                                    {{ c.id }} - {{ c.nombre }} {{ c.apellido }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="text-center mt-4">
+                        <a href="{% url 'listarCliente' %}" class="btn btn-secondary btn-sm rounded-pill">
+                            <i class="fa fa-arrow-left"></i> Cancelar
+                        </a>
+                        <button type="button" id="delete-button" class="btn btn-danger btn-sm rounded-pill">
+                            <i class="fa fa-trash"></i> Eliminar Cliente
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButton = document.getElementById('delete-button');
+        const deleteForm = document.getElementById('delete-form');
+
+        deleteButton.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteForm.submit(); // Enviar el formulario si el usuario confirma
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

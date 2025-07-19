@@ -1,0 +1,282 @@
+[
+    {
+        "codigo_provincia": 151,
+        "nombre": "Arica",
+        "region": 15
+    },
+    {
+        "codigo_provincia": 152,
+        "nombre": "Parinacota",
+        "region": 15
+    },
+    {
+        "codigo_provincia": 11,
+        "nombre": "Iquique",
+        "region": 1
+    },
+    {
+        "codigo_provincia": 14,
+        "nombre": "Tamarugal",
+        "region": 1
+    },
+    {
+        "codigo_provincia": 21,
+        "nombre": "Antofagasta",
+        "region": 2
+    },
+    {
+        "codigo_provincia": 22,
+        "nombre": "El Loa",
+        "region": 2
+    },
+    {
+        "codigo_provincia": 23,
+        "nombre": "Tocopilla",
+        "region": 2
+    },
+    {
+        "codigo_provincia": 31,
+        "nombre": "Copiapó",
+        "region": 3
+    },
+    {
+        "codigo_provincia": 32,
+        "nombre": "Chañaral",
+        "region": 3
+    },
+    {
+        "codigo_provincia": 33,
+        "nombre": "Huasco",
+        "region": 3
+    },
+    {
+        "codigo_provincia": 41,
+        "nombre": "Elqui",
+        "region": 4
+    },
+    {
+        "codigo_provincia": 42,
+        "nombre": "Choapa",
+        "region": 4
+    },
+    {
+        "codigo_provincia": 43,
+        "nombre": "Limari",
+        "region": 4
+    },
+    {
+        "codigo_provincia": 51,
+        "nombre": "Valparaíso",
+        "region": 5
+    },
+    {
+        "codigo_provincia": 58,
+        "nombre": "Marga Marga",
+        "region": 5
+    },
+    {
+        "codigo_provincia": 52,
+        "nombre": "Isla de Pascua",
+        "region": 5
+    },
+    {
+        "codigo_provincia": 53,
+        "nombre": "Los Andes",
+        "region": 5
+    },
+    {
+        "codigo_provincia": 54,
+        "nombre": "Petorca",
+        "region": 5
+    },
+    {
+        "codigo_provincia": 55,
+        "nombre": "Quillota",
+        "region": 5
+    },
+    {
+        "codigo_provincia": 56,
+        "nombre": "San Antonio",
+        "region": 5
+    },
+    {
+        "codigo_provincia": 57,
+        "nombre": "San Felipe",
+        "region": 5
+    },
+    {
+        "codigo_provincia": 61,
+        "nombre": "Cachapoal",
+        "region": 6
+    },
+    {
+        "codigo_provincia": 62,
+        "nombre": "Cardenal Caro",
+        "region": 6
+    },
+    {
+        "codigo_provincia": 63,
+        "nombre": "Colchagua",
+        "region": 6
+    },
+    {
+        "codigo_provincia": 71,
+        "nombre": "Talca",
+        "region": 7
+    },
+    {
+        "codigo_provincia": 72,
+        "nombre": "Cauquenes",
+        "region": 7
+    },
+    {
+        "codigo_provincia": 73,
+        "nombre": "Curico",
+        "region": 7
+    },
+    {
+        "codigo_provincia": 74,
+        "nombre": "Linares",
+        "region": 7
+    },
+    {
+        "codigo_provincia": 81,
+        "nombre": "Concepción",
+        "region": 8
+    },
+    {
+        "codigo_provincia": 82,
+        "nombre": "Arauco",
+        "region": 8
+    },
+    {
+        "codigo_provincia": 83,
+        "nombre": "Bío-Bío",
+        "region": 8
+    },
+    {
+        "codigo_provincia": 161,
+        "nombre": "Diguillín",
+        "region": 16
+    },
+    {
+        "codigo_provincia": 162,
+        "nombre": "Itata",
+        "region": 16
+    },
+    {
+        "codigo_provincia": 163,
+        "nombre": "Punilla",
+        "region": 16
+    },
+    {
+        "codigo_provincia": 91,
+        "nombre": "Cautín",
+        "region": 9
+    },
+    {
+        "codigo_provincia": 92,
+        "nombre": "Malleco",
+        "region": 9
+    },
+    {
+        "codigo_provincia": 141,
+        "nombre": "Valdivia",
+        "region": 14
+    },
+    {
+        "codigo_provincia": 142,
+        "nombre": "Ranco",
+        "region": 14
+    },
+    {
+        "codigo_provincia": 101,
+        "nombre": "Llanquihue",
+        "region": 10
+    },
+    {
+        "codigo_provincia": 102,
+        "nombre": "Chiloe",
+        "region": 10
+    },
+    {
+        "codigo_provincia": 103,
+        "nombre": "Osorno",
+        "region": 10
+    },
+    {
+        "codigo_provincia": 104,
+        "nombre": "Palena",
+        "region": 10
+    },
+    {
+        "codigo_provincia": 111,
+        "nombre": "Coihaique",
+        "region": 11
+    },
+    {
+        "codigo_provincia": 112,
+        "nombre": "Aisén",
+        "region": 11
+    },
+    {
+        "codigo_provincia": 113,
+        "nombre": "Capitan Prat",
+        "region": 11
+    },
+    {
+        "codigo_provincia": 114,
+        "nombre": "General Carrera",
+        "region": 11
+    },
+    {
+        "codigo_provincia": 121,
+        "nombre": "Magallanes",
+        "region": 12
+    },
+    {
+        "codigo_provincia": 122,
+        "nombre": "Antártica Chilena",
+        "region": 12
+    },
+    {
+        "codigo_provincia": 123,
+        "nombre": "Tierra del Fuego",
+        "region": 12
+    },
+    {
+        "codigo_provincia": 124,
+        "nombre": "Ultima Esperanza",
+        "region": 12
+    },
+    {
+        "codigo_provincia": 131,
+        "nombre": "Santiago",
+        "region": 13
+    },
+    {
+        "codigo_provincia": 132,
+        "nombre": "Cordillera",
+        "region": 13
+    },
+    {
+        "codigo_provincia": 133,
+        "nombre": "Chacabuco",
+        "region": 13
+    },
+    {
+        "codigo_provincia": 134,
+        "nombre": "Maipo",
+        "region": 13
+    },
+    {
+        "codigo_provincia": 135,
+        "nombre": "Melipilla",
+        "region": 13
+    },
+    {
+        "codigo_provincia": 136,
+        "nombre": "Talagante",
+        "region": 13
+    }
+]

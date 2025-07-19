@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="icon" href="{% static 'images/TECNOLO.png' %}" type="image/png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <div class="left-section"></div>
+        <div class="right-section">
+            <h1>Bienvenido</h1>
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <!-- Aplica los estilos a los campos del formulario -->
+                {{ form.as_p }}
+                <div class="forgot-password">
+                    <a href="{% url 'forgot_password' %}">¿Has olvidado tu contraseña?</a>
+                </div>
+                <button type="submit">Iniciar sesión</button>
+            </form>
+            <div class="create-account">
+                <a href="{% url 'registro' %}">¿Todavía no tienes una cuenta? Crea una.</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

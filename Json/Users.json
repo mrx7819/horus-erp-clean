@@ -1,0 +1,22 @@
+[
+    {
+        "username": "vicentefraile",
+        "password": "Password123",
+        "first_name": "Vicente",
+        "last_name": "Fraile",
+        "email": "vi.fraile@duocuc.cl",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true
+    },
+    {
+        "username": "jaimeeittel",
+        "password": "jaimerman123/",
+        "first_name": "Jaime",
+        "last_name": "Eittel",
+        "email": "jai.me@gmail.com",
+        "is_superuser": false,
+        "is_staff": false,
+        "is_active": true
+    }
+]

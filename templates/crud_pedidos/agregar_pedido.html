@@ -1,0 +1,206 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <div class="alert text-center">
+            <h3><strong>Agregar Pedido</strong></h3>
+            <p>Llena los campos a continuación para registrar un nuevo pedido.</p>
+        </div>
+
+        <div class="card shadow-lg p-4 rounded" style="max-width: 800px; margin: auto; background-color: #ffffff;">
+            {% if proveedor_seleccionado %}
+            <form id="add-order-form" action="{% url 'agregarPedido' proveedor_seleccionado.id %}" method="post" class="agregarPedido-form">
+            {% else %}
+                <p class="text-danger">No se ha seleccionado un proveedor. Por favor, selecciona un proveedor primero.</p>
+            {% endif %}
+        
+
+                {% csrf_token %}
+
+                <!-- Proveedor y Estado -->
+                <div class="row mb-3">
+                    <div class="form-group col-lg-6 col-md-12">
+                        <label for="proveedor"><strong>Proveedor</strong></label>
+                        <select class="form-control rounded-pill" id="proveedor" name="proveedor" required>
+                            {% for proveedor in proveedores %}
+                                <option value="{{ proveedor.id }}" {% if proveedor.id == proveedor_seleccionado.id %}selected{% endif %}>
+                                    {{ proveedor.nombre }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    
+                    <div class="form-group col-lg-6 col-md-12">
+                        <label for="estado"><strong>Estado</strong></label>
+                        <select class="form-control rounded-pill" id="estado" name="estado" required>
+                            {% for key, value in estado_choices %}
+                                <option value="{{ key }}">{{ value }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Observaciones -->
+                <div class="form-group mb-3">
+                    <label for="observaciones"><strong>Observaciones</strong></label>
+                    <textarea class="form-control rounded" id="observaciones" name="observaciones" rows="3"></textarea>
+                </div>
+
+                <hr>
+                <h4 class="text-dark mb-3">Detalles del Pedido</h4>
+
+                {% if productos %}
+                <div id="detalle-container">
+                    <div class="detalle-row row mb-2" data-detalle-id="">
+                        <div class="form-group col-md-3">
+                            <label for="producto"><strong>Producto</strong></label>
+                            <select class="form-control rounded-pill producto" name="productos[]" required>
+                                {% for producto in productos %}
+                                    <option value="{{ producto.id }}">{{ producto.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="cantidad"><strong>Cantidad</strong></label>
+                            <input type="number" class="form-control rounded-pill cantidad" name="cantidades[]" min="1" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="precio"><strong>Precio Unitario</strong></label>
+                            <input type="number" class="form-control rounded-pill precio" name="precios[]" step="0.01" readonly>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="direccion_entrega"><strong>Entrega en</strong></label>
+                            <select class="form-control rounded-pill direccion_entrega" name="direcciones_entrega[]" required>
+                                {% for bodega in bodegas %}
+                                    <option value="{{ bodega.id }}">{{ bodega.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-1 d-flex align-items-center">
+                            <button type="button" class="btn btn-danger btn-sm remove-detalle">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="add-detalle" class="btn btn-outline-primary btn-sm">
+                    <i class="fa fa-plus"></i> Agregar Detalle
+                </button>
+                {% else %}
+                <p class="text-danger">Este proveedor no tiene productos asociados.</p>
+                {% endif %}
+
+                <!-- Total Pedido -->
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label for="total_pedido"><strong>Total del Pedido</strong></label>
+                        <input type="text" class="form-control rounded-pill bg-light" id="total_pedido" name="total" value="0.00" readonly>
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="text-center mt-4">
+                    <a href="{% url 'listarPedido' %}" class="btn btn-secondary btn-sm rounded-pill">
+                        <i class="fa fa-arrow-left"></i> Volver
+                    </a>
+                    <button type="submit" class="btn btn-success btn-sm rounded-pill">
+                        <i class="fa fa-plus"></i> Agregar Pedido
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Scripts existentes para manejar dinámicamente detalles y precios
+        const detalleContainer = document.getElementById('detalle-container');
+        const addDetalleButton = document.getElementById('add-detalle');
+        const totalPedidoInput = document.getElementById('total_pedido');
+
+        function calculateRowTotal(row) {
+            const cantidad = parseFloat(row.querySelector('.cantidad').value) || 0;
+            const precio = parseFloat(row.querySelector('.precio').value) || 0;
+            return cantidad * precio;
+        }
+
+        function updateTotalPedido() {
+            const rows = detalleContainer.querySelectorAll('.detalle-row');
+            let totalPedido = 0;
+            rows.forEach(row => {
+                totalPedido += calculateRowTotal(row);
+            });
+            totalPedidoInput.value = `$${totalPedido.toFixed(2)}`;
+        }
+
+        function fetchProductPrice(productId, precioInput) {
+            fetch(`/get-product-price/${productId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        precioInput.value = data.precio;
+                        updateTotalPedido();
+                    } else {
+                        Swal.fire('Error', 'No se pudo obtener el precio del producto.', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al obtener el precio:', error);
+                    Swal.fire('Error', 'Ocurrió un error al intentar obtener el precio.', 'error');
+                });
+        }
+
+        addDetalleButton.addEventListener('click', function () {
+            const newDetalle = detalleContainer.firstElementChild.cloneNode(true);
+            newDetalle.querySelectorAll('input').forEach(input => input.value = '');
+            newDetalle.querySelectorAll('select').forEach(select => select.value = '');
+            detalleContainer.appendChild(newDetalle);
+            updateTotalPedido();
+        });
+
+        detalleContainer.addEventListener('click', function (event) {
+            if (event.target.closest('.remove-detalle')) {
+                const row = event.target.closest('.detalle-row');
+                detalleContainer.removeChild(row);
+                updateTotalPedido();
+            }
+        });
+
+        detalleContainer.addEventListener('change', function (event) {
+            const target = event.target;
+            if (target.classList.contains('producto')) {
+                const row = target.closest('.detalle-row');
+                const precioInput = row.querySelector('.precio');
+                const productId = target.value;
+
+                if (productId) {
+                    fetchProductPrice(productId, precioInput);
+                }
+            } else {
+                updateTotalPedido();
+            }
+        });
+
+        updateTotalPedido();
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const proveedorSelect = document.getElementById('proveedor');
+        const nombreProveedorInput = document.getElementById('nombre-proveedor');
+
+        proveedorSelect.addEventListener('change', function () {
+            // Obtener el texto de la opción seleccionada
+            const selectedOption = proveedorSelect.options[proveedorSelect.selectedIndex];
+            nombreProveedorInput.value = selectedOption.textContent.trim();
+        });
+    });
+</script>
+
+{% endblock %}

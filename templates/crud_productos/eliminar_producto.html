@@ -1,0 +1,95 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="container mt-5">
+        <div class="alert text-center">
+            <h3><strong>¡Atención!</strong> Estás a punto de eliminar un producto</h3>
+            <p>Esta acción no se puede deshacer. Por favor, asegúrate de que deseas continuar.</p>
+        </div>
+
+        <!-- Formulario en una tarjeta centrada -->
+        <div class="card shadow p-4 rounded" style="max-width: 600px; margin: auto; background-color: #ffffff;">
+            <div class="card-header text-center text-danger">
+                <h4>Eliminar Producto</h4>
+            </div>
+            <div class="card-body">
+                <form id="delete-form" action="{% if producto.id %}{% url 'eliminarProducto' producto.id %}{% endif %}" method="POST">
+                    {% csrf_token %}
+
+                    <!-- Selección de Proveedor -->
+                    <div class="form-group">
+                        <label for="id"><strong>Selecciona un Producto</strong></label>
+                        <select id="id" name="id" class="form-control rounded-pill">
+                            {% for p in productos %}
+                                <option value="{{ p.id }}" {% if p.id == proveedor.id %} selected {% endif %}>
+                                    {{ p.id }} - {{ p.nombre }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="text-center mt-4">
+                        <a href="{% url 'listarProducto' %}" class="btn btn-secondary btn-sm rounded-pill">
+                            <i class="fa fa-arrow-left"></i> Cancelar
+                        </a>
+                        <button type="button" id="delete-button" class="btn btn-danger btn-sm rounded-pill">
+                            <i class="fa fa-trash"></i> Eliminar Producto
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script para SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButton = document.getElementById('delete-button');
+        const deleteForm = document.getElementById('delete-form');
+
+        deleteButton.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción no se puede deshacer.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    deleteForm.submit(); // Enviar el formulario si el usuario confirma
+                }
+            });
+        });
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const errorMessage = "{{ error_message|default:'' }}";
+
+        if (errorMessage) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al eliminar',
+                text: errorMessage,
+                confirmButtonText: 'Volver'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{% url 'listarProducto' %}";
+                }
+            });
+        }
+    });
+</script>
+
+{% endblock %}

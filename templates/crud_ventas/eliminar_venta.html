@@ -1,0 +1,85 @@
+{% extends '../index_master.html' %}
+{% load static %}
+<link href="{% static 'FrWork/admin_lte/build/css/custom.css' %}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% block content %}
+<form id="deleteForm" action="{% if venta %}{% url 'eliminarVenta' venta.id %}{% endif %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="right_col" role="main">
+        <h3>Seleccione la Venta</h3>
+        <div class="form-group">
+            <label for="venta_id">Ventas disponibles</label>
+            <select id="id" name="id" class="form-control" onchange="updateVentaDetails(this.value)">
+                {% for v in ventas %}
+                    <option value="{{ v.id }}" {% if venta and v.id == venta.id %}selected{% endif %}>
+                        {{ v.id }} - Cliente: {{ v.cliente.nombre }} {{ v.cliente.apellido }} - Total: ${{ v.total_venta }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header bg-danger text-white">
+                Detalles de la Venta
+            </div>
+            <div class="card-body">
+                <p><strong>ID Venta:</strong> <span id="venta_id_text"></span></p>
+                <p><strong>Cliente:</strong> <span id="venta_cliente"></span></p>
+                <p><strong>Total:</strong> $<span id="venta_total"></span></p>
+                <p><strong>Estado:</strong> <span id="venta_estado"></span></p>
+                <p><strong>Método de Pago:</strong> <span id="venta_metodo_pago"></span></p>
+                <p><strong>Fecha de Creación:</strong> <span id="venta_fecha"></span></p>
+            </div>
+        </div>
+
+        <div class="form-group mt-4 text-center">
+            <button type="button" class="btn btn-danger" id="confirmDelete">
+                <i class="fa fa-trash"></i> Confirmar Eliminación
+            </button>
+            <a href="{% url 'listarVenta' %}" class="btn btn-secondary">
+                <i class="fa fa-arrow-left"></i> Cancelar
+            </a>
+        </div>
+    </div>
+</form>
+
+<script>
+    const ventas = JSON.parse('{{ ventas_json|escapejs }}');
+
+    function updateVentaDetails(ventaId) {
+        const venta = ventas.find(v => v.id == ventaId);
+
+        document.getElementById('venta_id_text').innerText = venta ? venta.id : '';
+        document.getElementById('venta_cliente').innerText = venta ? `${venta.cliente__nombre} ${venta.cliente__apellido}` : '';
+        document.getElementById('venta_total').innerText = venta ? venta.total_venta || 0 : '';
+        document.getElementById('venta_estado').innerText = venta ? venta.estado : '';
+        document.getElementById('venta_metodo_pago').innerText = venta ? venta.metodo_pago : '';
+        document.getElementById('venta_fecha').innerText = venta ? new Date(venta.fecha_creacion).toLocaleString() : '';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const selectedVentaId = document.getElementById('id').value;
+        updateVentaDetails(selectedVentaId);
+
+        // SweetAlert2 for delete confirmation
+        document.getElementById('confirmDelete').addEventListener('click', function () {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'Esta acción eliminará la venta seleccionada de forma permanente.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Submit the form
+                    document.getElementById('deleteForm').submit();
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
