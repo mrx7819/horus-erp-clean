@@ -62,7 +62,7 @@ DATABASES = {
 ### **Funcionalidades Avanzadas**
 - ✅ **Signals** para lógica reactiva
 - ✅ **Recovery password** por email con tokens seguros
-- ✅ **Upload de archivos** (logos proveedores)
+- ✅ **Upload de archivos**
 - ✅ **WhiteNoise** para archivos estáticos en producción
 - ✅ **Variables de entorno** para datos sensibles
 
@@ -259,7 +259,6 @@ Contraseña: Demo1234
 #### **Características Destacadas:**
 - ✅ **Clasificación por giros** económicos chilenos
 - ✅ **Geolocalización** completa (región/provincia/comuna)
-- ✅ **Upload de logos** empresariales
 - ✅ **Integración** con sistema de compras
 
 ---
